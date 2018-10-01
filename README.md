@@ -16,12 +16,14 @@ Once nvidia-docker is installed, make sure it run fine by launching :
 
 ### Pull the image from docker hub
 
+All the available images can be found at [docker hub](https://hub.docker.com/r/stereolabs/zed/)
+
     docker pull stereolabs/zed:ubuntu1604-cuda9.0-zed2.6
     nvidia-docker run -it --privileged stereolabs/zed:ubuntu1604-cuda9.0-zed2.6
 
 `--privileged` option is used to pass through all the device to the docker container, it might not be very safe but provides an easy solution to connect the USB3 camera to the container.
 
-The images are built with [Gitlab CI](https://gitlab.com/stereolabs/docker-zed)
+The images are built with [Gitlab CI](https://gitlab.com/bot-stereolabs/docker-zed/pipelines)
 
 ## Rebuilt or modifying the image
 
