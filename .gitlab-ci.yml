@@ -29,5 +29,5 @@ v2.6-cuda9.0-ros:
 v2.6-cuda9.2:
     variables:
         VERSION: "ubuntu1604-cuda9.2-zed2.6"
-        IMAGE_PATH: "2.6/ubuntu1604/cuda9.2/ros"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.2/devel"
     <<: *build_image_definition
