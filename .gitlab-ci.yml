@@ -1,0 +1,34 @@
+# Inspired from https://gitlab.com/nvidia/cuda/blob/ubuntu16.04/.gitlab-ci.yml
+image: docker:stable
+
+services:
+    - docker:stable-dind
+
+before_script:
+  - docker info
+  - docker login -u "${REGISTRY_USER}" -p "${REGISTRY_TOKEN}"
+
+.build_image_template: &build_image_definition
+    script:
+    - cd "${IMAGE_PATH}"
+    - docker build -t "${CI_REGISTRY_IMAGE}:${VERSION}" ./"${VERSION}"
+    - docker tag "${CI_REGISTRY_IMAGE}:${VERSION}" "${CI_REGISTRY_IMAGE}:${VERSION}";
+    - docker push "${CI_REGISTRY_IMAGE}"
+
+v2.6-cuda9.0:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.6"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.0/devel"
+    <<: *build_image_definition
+
+v2.6-cuda9.0-ros:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.6-ros"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_definition
+
+v2.6-cuda9.2:
+    variables:
+        VERSION: "ubuntu1604-cuda9.2-zed2.6"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.2/ros"
+    <<: *build_image_definition
