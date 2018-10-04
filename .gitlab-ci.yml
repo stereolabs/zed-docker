@@ -4,12 +4,16 @@ image: docker:stable
 services:
     - docker:stable-dind
 
-before_script:
-  - docker info
-  - docker login -u "${REGISTRY_USER}" -p "${REGISTRY_TOKEN}"
-
 .build_image_template: &build_image_definition
     script:
+    - docker build -t "${CI_REGISTRY_IMAGE}:${VERSION}" "${IMAGE_PATH}"
+    except:
+    - master
+
+.build_and_push_image_template: &build_image_definition
+    script:
+    - docker info
+    - docker login -u "${REGISTRY_USER}" -p "${REGISTRY_TOKEN}"
     - docker build -t "${CI_REGISTRY_IMAGE}:${VERSION}" "${IMAGE_PATH}"
     - docker tag "${CI_REGISTRY_IMAGE}:${VERSION}" "${CI_REGISTRY_IMAGE}:${VERSION}";
     - docker push "${CI_REGISTRY_IMAGE}"
