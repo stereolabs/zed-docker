@@ -13,6 +13,8 @@ before_script:
     - docker build -t "${CI_REGISTRY_IMAGE}:${VERSION}" "${IMAGE_PATH}"
     - docker tag "${CI_REGISTRY_IMAGE}:${VERSION}" "${CI_REGISTRY_IMAGE}:${VERSION}";
     - docker push "${CI_REGISTRY_IMAGE}"
+    only:
+    - master
 
 v2.6-cuda9.0:
     variables:
