@@ -10,7 +10,7 @@ services:
     except:
     - master
 
-.build_and_push_image_template: &build_image_definition
+.build_and_push_image_template: &build_image_push_definition
     script:
     - docker info
     - docker login -u "${REGISTRY_USER}" -p "${REGISTRY_TOKEN}"
@@ -19,6 +19,13 @@ services:
     - docker push "${CI_REGISTRY_IMAGE}"
     only:
     - master
+
+# BUILD
+v2.6-cuda9.0-gl:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.6-gl"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.0/devel-gl"
+    <<: *build_image_definition
 
 v2.6-cuda9.0:
     variables:
@@ -37,3 +44,28 @@ v2.6-cuda9.2:
         VERSION: "ubuntu1604-cuda9.2-zed2.6"
         IMAGE_PATH: "2.6/ubuntu1604/cuda9.2/devel"
     <<: *build_image_definition
+
+# BUILD and PUSH
+v2.6-cuda9.0-gl_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.6-gl"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.0/devel-gl"
+    <<: *build_image_push_definition
+
+v2.6-cuda9.0_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.6"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.0/devel"
+    <<: *build_image_push_definition
+
+v2.6-cuda9.0-ros_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.6-ros"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_push_definition
+
+v2.6-cuda9.2_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.2-zed2.6"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.2/devel"
+    <<: *build_image_push_definition
