@@ -29,6 +29,8 @@ The images are built with [Gitlab CI](https://gitlab.com/bot-stereolabs/docker-z
 
 A container is also available with OpenGL display support (from [nvidia/cudagl container](https://gitlab.com/nvidia/cudagl)).
 
+    docker pull stereolabs/zed:ubuntu1604-cuda9.0-zed2.6-gl
+
 To run it, we need to add the right to connect to the X server :
 
     xhost +si:localuser:root
@@ -39,7 +41,7 @@ Then to run it :
 
     nvidia-docker run -it --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:ubuntu1604-cuda9.0-zed2.6-gl
 
-Any OpenGL tools will now be able to run and display something on the host, for instance :
+Any OpenGL tools are now able to run, for instance :
 
     /usr/local/zed/tools/ZED\ Explorer
 
