@@ -1,7 +1,7 @@
-FROM nvidia/cuda:9.2-devel-ubuntu16.04
+FROM nvidia/cuda:9.1-devel-ubuntu16.04
 
 RUN apt-get update
 RUN apt-get install lsb-release wget less udev sudo apt-transport-https -y
-RUN wget -O ZED_SDK_Linux_Ubuntu16.run https://download.stereolabs.com/zedsdk/2.6/ubuntu 
+RUN wget -O ZED_SDK_Linux_Ubuntu16.run https://download.stereolabs.com/zedsdk/2.3/ubuntu 
 RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
 RUN chmod +x ZED_SDK_Linux_Ubuntu16.run ; ./ZED_SDK_Linux_Ubuntu16.run silent

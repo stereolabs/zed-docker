@@ -20,6 +20,7 @@ services:
     only:
     - master
 
+# 2.6
 v2.6-cuda9.0:
     variables:
         VERSION: "ubuntu1604-cuda9.0-zed2.6"
@@ -36,4 +37,100 @@ v2.6-cuda9.2:
     variables:
         VERSION: "ubuntu1604-cuda9.2-zed2.6"
         IMAGE_PATH: "2.6/ubuntu1604/cuda9.2/devel"
+    <<: *build_image_definition
+
+# 2.5
+v2.5-cuda9.0:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.5"
+        IMAGE_PATH: "2.5/ubuntu1604/cuda9.0/devel"
+    <<: *build_image_definition
+
+v2.5-cuda9.0-ros:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.5-ros"
+        IMAGE_PATH: "2.5/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_definition
+
+v2.5-cuda9.2:
+    variables:
+        VERSION: "ubuntu1604-cuda9.2-zed2.5"
+        IMAGE_PATH: "2.5/ubuntu1604/cuda9.2/devel"
+    <<: *build_image_definition
+
+# 2.4
+v2.4-cuda9.0:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.4"
+        IMAGE_PATH: "2.4/ubuntu1604/cuda9.0/devel"
+    <<: *build_image_definition
+
+v2.4-cuda9.0-ros:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.4-ros"
+        IMAGE_PATH: "2.4/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_definition
+
+v2.4-cuda9.1:
+    variables:
+        VERSION: "ubuntu1604-cuda9.1-zed2.4"
+        IMAGE_PATH: "2.4/ubuntu1604/cuda9.1/devel"
+    <<: *build_image_definition
+
+# 2.3
+v2.3-cuda9.1:
+    variables:
+        VERSION: "ubuntu1604-cuda9.1-zed2.3"
+        IMAGE_PATH: "2.3/ubuntu1604/cuda9.1/devel"
+    <<: *build_image_definition
+
+v2.3-cuda9.1-ros:
+    variables:
+        VERSION: "ubuntu1604-cuda9.1-zed2.3-ros"
+        IMAGE_PATH: "2.3/ubuntu1604/cuda9.1/ros"
+    <<: *build_image_definition
+
+# 2.2
+v2.2-cuda9.0:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.2"
+        IMAGE_PATH: "2.2/ubuntu1604/cuda9.0/devel"
+    <<: *build_image_definition
+
+v2.2-cuda9.0-ros:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.2-ros"
+        IMAGE_PATH: "2.2/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_definition
+
+v2.2-cuda8.0:
+    variables:
+        VERSION: "ubuntu1604-cuda8.0-zed2.2"
+        IMAGE_PATH: "2.2/ubuntu1604/cuda8.0/devel"
+    <<: *build_image_definition
+
+# 2.1
+v2.1-cuda8.0:
+    variables:
+        VERSION: "ubuntu1604-cuda8.0-zed2.1"
+        IMAGE_PATH: "2.1/ubuntu1604/cuda8.0/devel"
+    <<: *build_image_definition
+
+v2.1-cuda8.0-ros:
+    variables:
+        VERSION: "ubuntu1604-cuda8.0-zed2.1-ros"
+        IMAGE_PATH: "2.1/ubuntu1604/cuda8.0/ros"
+    <<: *build_image_definition
+
+# 2.0
+v2.0-cuda8.0:
+    variables:
+        VERSION: "ubuntu1604-cuda8.0-zed2.0"
+        IMAGE_PATH: "2.0/ubuntu1604/cuda8.0/devel"
+    <<: *build_image_definition
+
+v2.0-cuda8.0-ros:
+    variables:
+        VERSION: "ubuntu1604-cuda8.0-zed2.0-ros"
+        IMAGE_PATH: "2.0/ubuntu1604/cuda8.0/ros"
     <<: *build_image_definition
