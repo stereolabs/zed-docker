@@ -25,6 +25,28 @@ All the available images can be found at [docker hub](https://hub.docker.com/r/s
 
 The images are built with [Gitlab CI](https://gitlab.com/bot-stereolabs/docker-zed/pipelines)
 
+### OpenGL support
+
+A container is also available with OpenGL display support (from [nvidia/cudagl container](https://gitlab.com/nvidia/cudagl)).
+
+    docker pull stereolabs/zed:ubuntu1604-cuda9.0-zed2.6-gl
+
+To run it, we need to add the right to connect to the X server :
+
+    xhost +si:localuser:root
+
+While being simple, please note that this can be a security concern, considering the right given to the container.
+
+Then to run it :
+
+    nvidia-docker run -it --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:ubuntu1604-cuda9.0-zed2.6-gl
+
+Any OpenGL tools are now able to run, for instance :
+
+    /usr/local/zed/tools/ZED\ Explorer
+
+For more information on the display usage checkout the [ROS documentation about using Docker with X server](http://wiki.ros.org/docker/Tutorials/GUI).
+
 ## Rebuilt or modifying the image
 
 ### Build the image
@@ -45,10 +67,6 @@ Go to the folder with the version needed and run for instance :
 The camera connection can be verified using `lsusb`:
 
     lsusb -d 2b03: -vvv
-
-### Limitations
-
-- There is currently no display on this containers
 
 ## Contributing
 

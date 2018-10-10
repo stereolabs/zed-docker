@@ -20,7 +20,14 @@ services:
     only:
     - master
 
+# BUILD
 # 2.6
+v2.6-cuda9.0-gl:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.6-gl"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.0/devel-gl"
+    <<: *build_image_definition
+
 v2.6-cuda9.0:
     variables:
         VERSION: "ubuntu1604-cuda9.0-zed2.6"
@@ -135,10 +142,13 @@ v2.0-cuda8.0-ros:
         IMAGE_PATH: "2.0/ubuntu1604/cuda8.0/ros"
     <<: *build_image_definition
 
+# BUILD and PUSH
+v2.6-cuda9.0-gl_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.6-gl"
+        IMAGE_PATH: "2.6/ubuntu1604/cuda9.0/devel-gl"
+    <<: *build_image_push_definition
 
-## Build and push
-
-# 2.6
 v2.6-cuda9.0_push:
     variables:
         VERSION: "ubuntu1604-cuda9.0-zed2.6"
