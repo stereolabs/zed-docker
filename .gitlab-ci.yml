@@ -21,6 +21,49 @@ services:
     - master
 
 # BUILD
+#2.7
+v2.7-cuda9.0-u16-gl:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.7-gl"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda9.0/devel-gl"
+    <<: *build_image_definition
+
+v2.7-cuda9.0-u16:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.7"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda9.0/devel"
+    <<: *build_image_definition
+
+v2.7-cuda9.0-u16-ros:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.7-ros"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_definition
+
+v2.7-cuda10.0-u16:
+    variables:
+        VERSION: "ubuntu1604-cuda10.0-zed2.7"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda10.0/devel"
+    <<: *build_image_definition
+
+v2.7-cuda10.0-u18-gl:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.7-gl"
+        IMAGE_PATH: "2.7/ubuntu1804/cuda10.0/devel-gl"
+    <<: *build_image_definition
+
+v2.7-cuda10.0-u18:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.7"
+        IMAGE_PATH: "2.7/ubuntu1804/cuda10.0/devel"
+    <<: *build_image_definition
+
+v2.7-cuda10.0-u18-ros:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.7-ros"
+        IMAGE_PATH: "2.7/ubuntu1804/cuda10.0/ros"
+    <<: *build_image_definition
+
 # 2.6
 v2.6-cuda9.0-gl:
     variables:
@@ -143,6 +186,50 @@ v2.0-cuda8.0-ros:
     <<: *build_image_definition
 
 # BUILD and PUSH
+#2.7
+v2.7-cuda9.0-u16-gl_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.7-gl"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda9.0/devel-gl"
+    <<: *build_image_push_definition
+
+v2.7-cuda9.0-u16_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.7"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda9.0/devel"
+    <<: *build_image_push_definition
+
+v2.7-cuda9.0-u16-ros_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.7-ros"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_push_definition
+
+v2.7-cuda10.0-u16_push:
+    variables:
+        VERSION: "ubuntu1604-cuda10.0-zed2.7"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda10.0/devel"
+    <<: *build_image_push_definition
+
+v2.7-cuda10.0-u18-gl_push:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.7-gl"
+        IMAGE_PATH: "2.7/ubuntu1804/cuda10.0/devel-gl"
+    <<: *build_image_push_definition
+
+v2.7-cuda10.0-u18_push:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.7"
+        IMAGE_PATH: "2.7/ubuntu1804/cuda10.0/devel"
+    <<: *build_image_push_definition
+
+v2.7-cuda10.0-u18-ros_push:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.7-ros"
+        IMAGE_PATH: "2.7/ubuntu1804/cuda10.0/ros"
+    <<: *build_image_push_definition
+
+#2.6
 v2.6-cuda9.0-gl_push:
     variables:
         VERSION: "ubuntu1604-cuda9.0-zed2.6-gl"
