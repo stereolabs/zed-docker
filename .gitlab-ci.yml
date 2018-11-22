@@ -40,6 +40,12 @@ v2.7-cuda9.0-u16-ros:
         IMAGE_PATH: "2.7/ubuntu1604/cuda9.0/ros"
     <<: *build_image_definition
 
+v2.7-cuda10.0-u16-gl:
+    variables:
+        VERSION: "ubuntu1604-cuda10.0-zed2.7-gl"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda10.0/devel-gl"
+    <<: *build_image_definition
+
 v2.7-cuda10.0-u16:
     variables:
         VERSION: "ubuntu1604-cuda10.0-zed2.7"
@@ -203,6 +209,12 @@ v2.7-cuda9.0-u16-ros_push:
     variables:
         VERSION: "ubuntu1604-cuda9.0-zed2.7-ros"
         IMAGE_PATH: "2.7/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_push_definition
+
+v2.7-cuda10.0-u16-gl_push:
+    variables:
+        VERSION: "ubuntu1604-cuda10.0-zed2.7-gl"
+        IMAGE_PATH: "2.7/ubuntu1604/cuda10.0/devel-gl"
     <<: *build_image_push_definition
 
 v2.7-cuda10.0-u16_push:
