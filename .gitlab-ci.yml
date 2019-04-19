@@ -21,6 +21,55 @@ services:
     - master
 
 # BUILD
+#2.8
+v2.8-cuda9.0-u16-gl:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.8-gl"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/devel-gl"
+    <<: *build_image_definition
+
+v2.8-cuda9.0-u16:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.8"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/devel"
+    <<: *build_image_definition
+
+v2.8-cuda9.0-u16-ros:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.8-ros"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_definition
+
+v2.8-cuda10.0-u16-gl:
+    variables:
+        VERSION: "ubuntu1604-cuda10.0-zed2.8-gl"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda10.0/devel-gl"
+    <<: *build_image_definition
+
+v2.8-cuda10.0-u16:
+    variables:
+        VERSION: "ubuntu1604-cuda10.0-zed2.8"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda10.0/devel"
+    <<: *build_image_definition
+
+v2.8-cuda10.0-u18-gl:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.8-gl"
+        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/devel-gl"
+    <<: *build_image_definition
+
+v2.8-cuda10.0-u18:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.8"
+        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/devel"
+    <<: *build_image_definition
+
+v2.8-cuda10.0-u18-ros:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.8-ros"
+        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/ros"
+    <<: *build_image_definition
+
 #2.7
 v2.7-cuda9.0-u16-gl:
     variables:
@@ -192,6 +241,55 @@ v2.0-cuda8.0-ros:
     <<: *build_image_definition
 
 # BUILD and PUSH
+#2.8
+v2.8-cuda9.0-u16-gl_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.8-gl"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/devel-gl"
+    <<: *build_image_push_definition
+
+v2.8-cuda9.0-u16_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.8"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/devel"
+    <<: *build_image_push_definition
+
+v2.8-cuda9.0-u16-ros_push:
+    variables:
+        VERSION: "ubuntu1604-cuda9.0-zed2.8-ros"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/ros"
+    <<: *build_image_push_definition
+
+v2.8-cuda10.0-u16-gl_push:
+    variables:
+        VERSION: "ubuntu1604-cuda10.0-zed2.8-gl"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda10.0/devel-gl"
+    <<: *build_image_push_definition
+
+v2.8-cuda10.0-u16_push:
+    variables:
+        VERSION: "ubuntu1604-cuda10.0-zed2.8"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda10.0/devel"
+    <<: *build_image_push_definition
+
+v2.8-cuda10.0-u18-gl_push:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.8-gl"
+        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/devel-gl"
+    <<: *build_image_push_definition
+
+v2.8-cuda10.0-u18_push:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.8"
+        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/devel"
+    <<: *build_image_push_definition
+
+v2.8-cuda10.0-u18-ros_push:
+    variables:
+        VERSION: "ubuntu1804-cuda10.0-zed2.8-ros"
+        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/ros"
+    <<: *build_image_push_definition
+
 #2.7
 v2.7-cuda9.0-u16-gl_push:
     variables:
