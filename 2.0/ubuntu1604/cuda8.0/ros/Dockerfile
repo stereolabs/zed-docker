@@ -18,7 +18,7 @@ RUN apt-get update -y && \
     rm 3.1.0.zip && \
     cd opencv-3.1.0 ; mkdir build ; cd build ; cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
     make -j8 install && \
-    cd .. ; rm -rf opencv-3.1.0 && \
+    cd ../.. ; rm -rf opencv-3.1.0 && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update -y && \ 
