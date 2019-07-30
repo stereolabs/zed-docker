@@ -11,7 +11,9 @@ RUN apt-get update -y && \
     wget https://github.com/opencv/opencv/archive/3.1.0.zip && \
     unzip 3.1.0.zip && \
     rm 3.1.0.zip && \
-    cd opencv-3.1.0 ; mkdir build ; cd build ; cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
+    cd opencv-3.1.0 ; mkdir build ; cd build ; cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_PERF_TESTS=OFF \
+        -DBUILD_TESTS=OFF -DWITH_OPENCL=OFF -DWITH_CUDA=OFF -DBUILD_opencv_apps=OFF -DBUILD_OPENCV_PYTHON2=OFF -DBUILD_OPENCV_PYTHON3=OFF \
+        -DBUILD_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
     make -j8 install && \
     cd ../.. ; rm -rf opencv-3.1.0 && \
     rm -rf /var/lib/apt/lists/*

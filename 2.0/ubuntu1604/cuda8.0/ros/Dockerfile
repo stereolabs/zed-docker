@@ -18,7 +18,7 @@ RUN apt-get update -y && \
     unzip 3.1.0.zip && \
     rm 3.1.0.zip && \
     cd opencv-3.1.0 ; mkdir build ; cd build ; cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_DOCS=OFF -DBUILD_PERF_TESTS=OFF \
-        -DBUILD_TESTS=OFF -DWITH_OPENCL=OFF -DWITH_CUDA=OFF -DBUILD_OPENCV_PYTHON2=OFF -DBUILD_OPENCV_PYTHON3=OFF \
+        -DBUILD_TESTS=OFF -DWITH_OPENCL=OFF -DWITH_CUDA=OFF -DBUILD_opencv_apps=OFF -DBUILD_OPENCV_PYTHON2=OFF -DBUILD_OPENCV_PYTHON3=OFF \
         -DBUILD_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=/usr/local .. && \
     make -j8 install && \
     cd ../.. ; rm -rf opencv-3.1.0 && \
@@ -32,7 +32,7 @@ RUN apt-get update -y && \
 
 # Setup ROS
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
-    apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 && \
+    apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
     apt-get update -y && \
     apt-get install ros-kinetic-desktop-full python-rosinstall python-rosinstall-generator python-wstool build-essential nano cmake usbutils git -y --allow-unauthenticated && \
     rm -rf /var/lib/apt/lists/*
