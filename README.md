@@ -6,30 +6,34 @@ This images let you use the ZED SDK with docker, even with the ZED camera connec
 
 ### Setup Docker
 
-Since we need CUDA, **nvidia-docker must be used** (except for compilation only).
+Since we need CUDA, **NVIDIA Container Toolkit must be used** (except for compilation only).
 
 Follow the instructions at https://github.com/NVIDIA/nvidia-docker
 
-Once nvidia-docker is installed, make sure it run fine by launching :
+Once NVIDIA Container Toolkit is installed, make sure it run fine by launching :
 
-    nvidia-docker run --rm nvidia/cuda nvidia-smi
+    docker run --runtime nvidia --rm nvidia/cuda nvidia-smi
+
+or 
+
+    docker run --gpus all --rm nvidia/cuda nvidia-smi
 
 ### Pull the image from docker hub
 
 All the available images can be found at [docker hub](https://hub.docker.com/r/stereolabs/zed/)
 
-    docker pull stereolabs/zed:ubuntu1604-cuda9.0-zed2.6
-    nvidia-docker run -it --privileged stereolabs/zed:ubuntu1604-cuda9.0-zed2.6
+    docker pull stereolabs/zed:ubuntu1604-cuda9.0-zed2.8
+    docker run --runtime nvidia -it --privileged stereolabs/zed:ubuntu1604-cuda9.0-zed2.8
 
 `--privileged` option is used to pass through all the device to the docker container, it might not be very safe but provides an easy solution to connect the USB3 camera to the container.
 
 The images are built with [Gitlab CI](https://gitlab.com/bot-stereolabs/docker-zed/pipelines)
 
-### OpenGL support
+### Display support
 
-A container is also available with OpenGL display support (from [nvidia/cudagl container](https://gitlab.com/nvidia/cudagl)).
+A container is also available with OpenGL display support (from [nvidia/cudagl container](https://gitlab.com/nvidia/cudagl)). It is mandatory to open the tools from within an image.
 
-    docker pull stereolabs/zed:ubuntu1604-cuda9.0-zed2.6-gl
+    docker pull stereolabs/zed:ubuntu1604-cuda9.0-zed2.8-gl
 
 To run it, we need to add the right to connect to the X server :
 
@@ -39,7 +43,7 @@ While being simple, please note that this can be a security concern, considering
 
 Then to run it :
 
-    nvidia-docker run -it --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:ubuntu1604-cuda9.0-zed2.6-gl
+    docker run --runtime nvidia -it --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:ubuntu1604-cuda9.0-zed2.8-gl
 
 Any OpenGL tools are now able to run, for instance :
 
@@ -57,12 +61,12 @@ The cuda version can easily be change, as the ZED SDK version.
 
 Go to the folder with the version needed and run for instance :
 
-    cd 2.6/ubuntu1604/cuda9.0/devel
-    docker build -t zed:ubuntu1604-cuda9.0-zed2.6 .
+    cd 2.8/ubuntu1604/cuda9.0/devel
+    docker build -t zed:ubuntu1604-cuda9.0-zed2.8 .
 
 ### Run the local image
 
-    nvidia-docker run -it --privileged zed:ubuntu1604-cuda9.0-zed2.6
+    docker run --runtime nvidia -it --privileged zed:ubuntu1604-cuda9.0-zed2.8
 
 The camera connection can be verified using `lsusb`:
 
