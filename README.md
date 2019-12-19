@@ -1,6 +1,6 @@
 # Docker with the ZED SDK (beta)
 
-This images let you use the ZED SDK with docker, even with the ZED camera connected (or an SVO file)
+These images let you use the ZED SDK with docker, even with the ZED camera connected (or an SVO file)
 
 ## Getting started
 
@@ -10,7 +10,7 @@ Since we need CUDA, **NVIDIA Container Toolkit must be used** (except for compil
 
 Follow the instructions at https://github.com/NVIDIA/nvidia-docker
 
-Once NVIDIA Container Toolkit is installed, make sure it run fine by launching :
+Once NVIDIA Container Toolkit is installed, make sure it runs fine by launching :
 
     docker run --runtime nvidia --rm nvidia/cuda nvidia-smi
 
@@ -57,7 +57,7 @@ For more information on the display usage checkout the [ROS documentation about 
 
 The images are based on cuda images from nvidia https://gitlab.com/nvidia/cuda/
 
-The cuda version can easily be change, as the ZED SDK version.
+The cuda version can easily be changed, as the ZED SDK version.
 
 Go to the folder with the version needed and run for instance :
 
@@ -71,6 +71,48 @@ Go to the folder with the version needed and run for instance :
 The camera connection can be verified using `lsusb`:
 
     lsusb -d 2b03: -vvv
+
+## Jetson images
+
+### Using docker on Tegra
+
+With the [recently added support](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) of nvidia docker, it is now possible to run the ZED SDK inside docker on Jetson. We now provide a compatible image :
+
+```bash
+docker pull stereolabs/zed:2.8-devel-jetson-jp4.2.1
+```
+
+One exemple of DockerFile can be found [here](2.8/l4t/jetpack_4.2/devel/Dockerfile). The image is based on the [NVIDIA L4T image](https://ngc.nvidia.com/catalog/containers/nvidia:l4t-base).
+
+### Building the image
+
+The image can either be built on the jetson directly or on Desktop `x86_64` using emulation.
+
+To setup a `x86_64` host to build `aarch64` image, [QEMU](https://www.qemu.org/) needs to be installed and configured by running :
+
+
+```bash
+    sudo apt-get install qemu binfmt-support qemu-user-static # Set up the qemu packages
+    docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This step will execute the registering scripts
+``` 
+
+Testing the emulation by running a `aarch64` image on desktop :
+
+```bash
+    docker run --rm -t arm64v8/ubuntu uname -m
+
+        aarch64 # -> emulation is working
+```
+
+The installation was successful, the emulation is working. At this point we can now run `aarch64` programs on the host `x86_64` PC.
+
+```bash
+cd 2.8/l4t/jetpack_4.2/devel
+docker build -t zed:2.8-devel-jetson-jp4.2.1 .
+```
+
+Unfortunately it is not possible to emulate CUDA accelerated program with QEMU.
+
 
 ## Contributing
 
