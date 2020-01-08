@@ -1,5 +1,5 @@
 #https://ngc.nvidia.com/catalog/containers/nvidia:l4t-base
-FROM nvcr.io/nvidia/l4t-base:r32.2.1
+FROM nvcr.io/nvidia/l4t-base:r32.3.1
 
 #This environment variable is needed to use the streaming features on Jetson inside a container
 ENV LOGNAME root
@@ -10,7 +10,7 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update -y && \ 
-    wget -O ZED_SDK_Linux_JP_v2.8.run https://download.stereolabs.com/zedsdk/2.8/jp42/jetsons && \
+    wget -O ZED_SDK_Linux_JP_v2.8.run https://download.stereolabs.com/zedsdk/2.8/jp43/jetsons && \
     chmod +x ZED_SDK_Linux_JP_v2.8.run ; ./ZED_SDK_Linux_JP_v2.8.run silent && \
     rm -rf ZED_SDK_Linux_JP_v2.8.run && \
     rm -rf /var/lib/apt/lists/*
