@@ -11,7 +11,7 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update -y && \ 
-    wget -O ZED_SDK_Linux_Ubuntu18.run https://download.stereolabs.com/zedsdk/2.8/ubuntu18 && \
+    wget -O ZED_SDK_Linux_Ubuntu18.run https://download.stereolabs.com/zedsdk/2.8/cu100/ubuntu18 && \
     chmod +x ZED_SDK_Linux_Ubuntu18.run ; ./ZED_SDK_Linux_Ubuntu18.run silent && \
     rm ZED_SDK_Linux_Ubuntu18.run && \
     rm -rf /var/lib/apt/lists/*

@@ -1,5 +1,3 @@
-# Need nvidia-docker to run https://github.com/NVIDIA/nvidia-docker
-# Image from https://gitlab.com/nvidia/cuda/
 FROM nvidia/cuda:9.0-devel-ubuntu16.04
 
 # The runtime image might be enough, depending on the need
@@ -11,7 +9,7 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update -y && \ 
-    wget -O ZED_SDK_Linux_Ubuntu16.run https://download.stereolabs.com/zedsdk/2.8/ubuntu16_cuda9 && \
+    wget -O ZED_SDK_Linux_Ubuntu16.run https://download.stereolabs.com/zedsdk/2.8/cu90/ubuntu16 && \
     chmod +x ZED_SDK_Linux_Ubuntu16.run ; ./ZED_SDK_Linux_Ubuntu16.run silent && \
     rm ZED_SDK_Linux_Ubuntu16.run && \
     rm -rf /var/lib/apt/lists/*
