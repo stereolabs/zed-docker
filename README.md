@@ -114,7 +114,15 @@ docker build -t zed:2.8-devel-jetson-jp4.2.1 .
 Unfortunately it is not possible to emulate CUDA accelerated program with QEMU.
 
 
+## Troubleshooting
+
+- "`libcuda.so.1` is not found" : make sure to run the image with `--gpus all` (or specify the GPU ID). It allows docker to mount the host driver into the image.
+
+- "`libnvcuvid.so.1` is not found" : make sure to run the image with `--gpus all,capabilities=video`. It allows docker to mount the host driver, including the hardware decoding library into the image.
+
+
 ## Contributing
 
 This is a first version of docker images for the ZED.
 Feel free to open an issue if you find a bug, or a pull request for bug fixes, features or other improvements.
+

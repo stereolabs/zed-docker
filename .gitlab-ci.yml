@@ -107,6 +107,41 @@ v2.8-cuda10.0-u18-ros_push:
         IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/ros"
     when: manual
     <<: *build_image_push_definition
+#
+v2.8-cuda9.0-u16-run_push:
+    variables:
+        VERSION: "2.8-runtime-cuda9.0-ubuntu16.04"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/runtime"
+    when: manual
+    <<: *build_image_push_definition
+
+v2.8-cuda10.0-u16-run_push:
+    variables:
+        VERSION: "2.8-runtime-cuda10.0-ubuntu16.04"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda10.0/runtime"
+    when: manual
+    <<: *build_image_push_definition
+
+v2.8-cuda10.2-u16-run_push:
+    variables:
+        VERSION: "2.8-runtime-cuda10.2-ubuntu16.04"
+        IMAGE_PATH: "2.8/ubuntu1604/cuda10.2/runtime"
+    when: manual
+    <<: *build_image_push_definition
+
+v2.8-cuda10.0-u18-run_push:
+    variables:
+        VERSION: "2.8-runtime-cuda10.0-ubuntu18.04"
+        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/runtime"
+    when: manual
+    <<: *build_image_push_definition
+
+v2.8-cuda10.2-u18-run_push:
+    variables:
+        VERSION: "2.8-runtime-cuda10.2-ubuntu18.04"
+        IMAGE_PATH: "2.8/ubuntu1804/cuda10.2/runtime"
+    when: manual
+    <<: *build_image_push_definition
 
 #2.7
 v2.7-cuda9.0-u16-gl_push:
