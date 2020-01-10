@@ -12,10 +12,6 @@ Follow the instructions at https://github.com/NVIDIA/nvidia-docker
 
 Once NVIDIA Container Toolkit is installed, make sure it runs fine by launching :
 
-    docker run --runtime nvidia --rm nvidia/cuda nvidia-smi
-
-or
-
     docker run --gpus all --rm nvidia/cuda nvidia-smi
 
 ### Pull the image from docker hub
@@ -23,7 +19,7 @@ or
 All the available images can be found at [docker hub](https://hub.docker.com/r/stereolabs/zed/)
 
     docker pull stereolabs/zed:2.8-runtime-cuda9.0-ubuntu16.04
-    docker run --runtime nvidia -it --privileged stereolabs/zed:2.8-runtime-cuda9.0-ubuntu16.04
+    docker run --gpus all -it --privileged stereolabs/zed:2.8-runtime-cuda9.0-ubuntu16.04
 
 `--privileged` option is used to pass through all the device to the docker container, it might not be very safe but provides an easy solution to connect the USB3 camera to the container.
 
@@ -43,7 +39,7 @@ While being simple, please note that this can be a security concern, considering
 
 Then to run it :
 
-    docker run --runtime nvidia -it --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:2.8-gl-devel-cuda9.0-ubuntu16.04
+    docker run --gpus all -it --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:2.8-gl-devel-cuda9.0-ubuntu16.04
 
 Any OpenGL tools are now able to run, for instance :
 
@@ -66,7 +62,7 @@ Go to the folder with the version needed and run for instance :
 
 ### Run the local image
 
-    docker run --runtime nvidia -it --privileged zed:2.8-devel-cuda10.0-ubuntu18.04
+    docker run --gpus all -it --privileged zed:2.8-devel-cuda10.0-ubuntu18.04
 
 The camera connection can be verified using `lsusb`:
 
@@ -115,9 +111,28 @@ Unfortunately it is not possible to emulate CUDA accelerated program with QEMU.
 
 ## Troubleshooting
 
+### Nvidia driver libraries missing in the container
+
 - "`libcuda.so.1` is not found" : make sure to run the image with `--gpus all` (or specify the GPU ID). It allows docker to mount the host driver into the image.
 
 - "`libnvcuvid.so.1` is not found" : make sure to run the image with `--gpus all,capabilities=video`. It allows docker to mount the host driver, including the hardware decoding library into the image.
+
+### USB replug/hot plug
+
+ZED-M contains a udev device for the IMU and sensors data.
+On Linux, udev/serial device path are often ephemeral (will change if the device is unplugged and replugged).
+
+If you unplug/plug them back in, it’s technically a different mapped file for the device than what was mounted in, so Docker won’t see it. For this reason, a solution is to mount the entire /dev folder from the host to the container. You can do this by adding the following volume command to your Docker run command `-v /dev:/dev`
+
+For example :
+
+```
+docker run --gpus all -it -v /dev:/dev --privileged stereolabs/zed:2.8-runtime-cuda9.0-ubuntu16.04
+```
+
+### Using the tools
+
+The tools are using OpenGL libraries. The "`gl`" images are therefore required to use them (see [display support section](#display-support)).
 
 ## Contributing
 
