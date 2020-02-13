@@ -115,7 +115,7 @@ Unfortunately it is not possible to emulate CUDA accelerated program with QEMU.
 
 - "`libcuda.so.1` is not found" : make sure to run the image with `--gpus all` (or specify the GPU ID). It allows docker to mount the host driver into the image.
 
-- "`libnvcuvid.so.1` is not found" : make sure to run the image with `--gpus all,capabilities=video`. It allows docker to mount the host driver, including the hardware decoding library into the image.
+- "`libnvcuvid.so.1` is not found" : make sure to run the image with `--gpus 'all,"capabilities=compute,video"'` or `-e NVIDIA_DRIVER_CAPABILITIES=all --gpus all`. It allows docker to mount the host driver, including the hardware decoding library into the image.
 
 ### USB replug/hot plug
 
