@@ -1,15 +1,23 @@
 FROM nvidia/cudagl:10.2-devel-ubuntu16.04
 
-# The runtime image might be enough, depending on the need
+ENV NVIDIA_DRIVER_CAPABILITIES \
+        ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}compute,video,utility,graphics
 
 # Setup the ZED SDK
-RUN apt-get update
-RUN apt-get install lsb-release wget less udev sudo apt-transport-https -y
-RUN wget -O ZED_SDK_Linux_Ubuntu16.run https://download.stereolabs.com/zedsdk/3.0/cu102/ubuntu16
-RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-RUN chmod +x ZED_SDK_Linux_Ubuntu16.run ; ./ZED_SDK_Linux_Ubuntu16.run silent
+RUN apt-get update -y && apt-get install --no-install-recommends lsb-release wget less udev sudo -y && \
+    wget -O ZED_SDK_Linux_Ubuntu16.run https://download.stereolabs.com/zedsdk/3.0/cu102/ubuntu16 && \
+    chmod +x ZED_SDK_Linux_Ubuntu16.run ; ./ZED_SDK_Linux_Ubuntu16.run silent && \
+    rm ZED_SDK_Linux_Ubuntu16.run && \
+    rm -rf /var/lib/apt/lists/*
+    
+# ZED Python API
+RUN apt-get update -y && apt-get install --no-install-recommends python3 python3-pip -y && \ 
+    wget download.stereolabs.com/zedsdk/pyzed -O /usr/local/zed/get_python_api.py && \
+    python3 /usr/local/zed/get_python_api.py && \
+    python3 -m pip install numpy opencv-python pyopengl *.whl && \
+    rm *.whl ; rm -rf /var/lib/apt/lists/*
 
 # Make some tools happy
 RUN mkdir -p /root/Documents/ZED/
-# Install some other packages
-RUN apt-get install nano cmake usbutils git libqt5xml5 libxmu-dev libxi-dev -y
+
+WORKDIR /usr/local/zed/
