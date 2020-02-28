@@ -39,7 +39,7 @@ v3.0-cuda9.0-u16_push:
 
 v3.0-cuda9.0-u16-ros_push:
     variables:
-        VERSION: "3.0-ros-cuda9.0-ubuntu16.04"
+        VERSION: "3.0-ros-devel-cuda9.0-ubuntu16.04"
         IMAGE_PATH: "3.0/ubuntu1604/cuda9.0/ros"
     when: manual
     <<: *build_image_push_definition
@@ -102,7 +102,7 @@ v3.0-cuda10.2-u18_push:
 
 v3.0-cuda10.0-u18-ros_push:
     variables:
-        VERSION: "3.0-ros-cuda10.0-ubuntu18.04"
+        VERSION: "3.0-ros-devel-cuda10.0-ubuntu18.04"
         IMAGE_PATH: "3.0/ubuntu1804/cuda10.0/ros"
     when: manual
     <<: *build_image_push_definition

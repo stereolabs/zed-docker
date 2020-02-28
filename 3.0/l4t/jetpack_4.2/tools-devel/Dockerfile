@@ -6,7 +6,7 @@ ENV LOGNAME root
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y && apt-get install --no-install-recommends lsb-release wget less udev sudo apt-transport-https -y && \
     wget -O ZED_SDK_Linux_JP.run https://download.stereolabs.com/zedsdk/3.0/jp42/jetsons && \
-    chmod +x ZED_SDK_Linux_JP.run ; ./ZED_SDK_Linux_JP.run silent skip_tools && \
+    chmod +x ZED_SDK_Linux_JP.run ; ./ZED_SDK_Linux_JP.run silent && \
     rm -rf /usr/local/zed/resources/* \
     rm -rf ZED_SDK_Linux_JP.run && \
     rm -rf /var/lib/apt/lists/*
