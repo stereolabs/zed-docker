@@ -1,4 +1,4 @@
-push_images=false
+push_images=true
 build_latest_only_images=true
 
 ######### 3.0

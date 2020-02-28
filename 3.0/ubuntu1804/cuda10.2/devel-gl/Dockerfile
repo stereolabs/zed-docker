@@ -7,7 +7,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES \
 
 # Setup the ZED SDK
 RUN apt-get update -y && apt-get install --no-install-recommends lsb-release wget less udev sudo apt-transport-https \
-        libqt5xml5 libxmu-dev libxi-dev -y && \
+        libqt5xml5 libxmu-dev libxi-dev build-essential cmake -y && \
     wget -O ZED_SDK_Linux_Ubuntu18.run https://download.stereolabs.com/zedsdk/3.0/cu102/ubuntu18 && \
     chmod +x ZED_SDK_Linux_Ubuntu18.run ; ./ZED_SDK_Linux_Ubuntu18.run silent && \
     rm ZED_SDK_Linux_Ubuntu18.run && \

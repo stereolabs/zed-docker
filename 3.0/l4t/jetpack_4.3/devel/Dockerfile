@@ -4,7 +4,7 @@ FROM nvcr.io/nvidia/l4t-base:r32.3.1
 #This environment variable is needed to use the streaming features on Jetson inside a container
 ENV LOGNAME root
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update -y && apt-get install --no-install-recommends lsb-release wget less udev sudo apt-transport-https -y && \
+RUN apt-get update -y && apt-get install --no-install-recommends lsb-release wget less udev sudo apt-transport-https build-essential cmake -y && \
     wget -O ZED_SDK_Linux_JP.run https://download.stereolabs.com/zedsdk/3.0/jp43/jetsons && \
     chmod +x ZED_SDK_Linux_JP.run ; ./ZED_SDK_Linux_JP.run silent skip_tools && \
     rm -rf /usr/local/zed/resources/* \
