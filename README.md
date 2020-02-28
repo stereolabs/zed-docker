@@ -117,6 +117,39 @@ Unfortunately it is not possible to emulate CUDA accelerated program with QEMU.
 
 - "`libnvcuvid.so.1` is not found" : make sure to run the image with `--gpus 'all,"capabilities=compute,video"'` or `-e NVIDIA_DRIVER_CAPABILITIES=all --gpus all`. It allows docker to mount the host driver, including the hardware decoding library into the image.
 
+### Compiling issues
+
+- `CUDA_CUDA_LIBRARY` not found when running cmake configuration
+```
+CMake Error: The following variables are used in this project, but they are set to NOTFOUND.
+Please set them or make sure they are set and tested correctly in the CMake files:
+CUDA_CUDA_LIBRARY (ADVANCED)
+```
+- Missing `libnvcuvid.so.1`
+```
+/usr/bin/ld: warning: libnvcuvid.so.1, needed by /usr/local/zed/lib/libsl_zed.so, not found (try using -rpath or -rpath-link)
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidDestroyDecoder'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidUnmapVideoFrame64'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidDestroyVideoParser'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidMapVideoFrame64'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidCtxLockCreate'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidGetDecoderCaps'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidParseVideoData'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidDecodePicture'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidCreateDecoder'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidCtxLockDestroy'
+/usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidCreateVideoParser'
+collect2: error: ld returned 1 exit status
+```
+
+Both problem can be fixed using the following cmake options :
+
+```
+cmake -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined" ..
+```
+The link path need to point to the CUDA stub folder, and since `nvcuvid` can be unavailable at compile time, we tell the compiler to ignore undefined symbols.
+
+
 ### USB replug/hot plug
 
 ZED-M contains a udev device for the IMU and sensors data.
