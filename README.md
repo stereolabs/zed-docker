@@ -25,6 +25,14 @@ All the available images can be found at [docker hub](https://hub.docker.com/r/s
 
 The images are built with [Gitlab CI](https://gitlab.com/bot-stereolabs/docker-zed/pipelines)
 
+---
+
+When using the **object detection module**, a volume should be used to store the model and optimized model to avoid re-downloading it and re-optimizing it every time. 
+
+    docker run --gpus all -it --privileged -v /usr/local/zed/resources:/usr/local/zed/resources stereolabs/zed:3.0-runtime-cuda10.0-ubuntu18.04
+
+Note : On the host it can point to an other folder than `/usr/local/zed/resources` (for instance `-v /mnt/SSD/zed_data:/usr/local/zed/resources`)
+
 ### Display support
 
 A container is also available with OpenGL display support (from [nvidia/cudagl container](https://gitlab.com/nvidia/cudagl)). It is mandatory to open the tools from within an image.
