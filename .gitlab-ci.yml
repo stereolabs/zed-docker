@@ -22,7 +22,128 @@ services:
 ############################
 
 # BUILD and PUSH
-#3.0
+#3.1
+v3.1-cuda9.0-u16-gl_push:
+    variables:
+        VERSION: "3.1-gl-devel-cuda9.0-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda9.0/devel-gl"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda9.0-u16_push:
+    variables:
+        VERSION: "3.1-devel-cuda9.0-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda9.0/devel"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda9.0-u16-ros_push:
+    variables:
+        VERSION: "3.1-ros-devel-cuda9.0-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda9.0/devel-ros"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.0-u16-gl_push:
+    variables:
+        VERSION: "3.1-gl-devel-cuda10.0-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda10.0/devel-gl"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.0-u16_push:
+    variables:
+        VERSION: "3.1-devel-cuda10.0-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda10.0/devel"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.2-u16-gl_push:
+    variables:
+        VERSION: "3.1-gl-devel-cuda10.2-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda10.2/devel-gl"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.2-u16_push:
+    variables:
+        VERSION: "3.1-devel-cuda10.2-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda10.2/devel"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.0-u18-gl_push:
+    variables:
+        VERSION: "3.1-gl-devel-cuda10.0-ubuntu18.04"
+        IMAGE_PATH: "3.1/ubuntu1804/cuda10.0/devel-gl"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.0-u18_push:
+    variables:
+        VERSION: "3.1-devel-cuda10.0-ubuntu18.04"
+        IMAGE_PATH: "3.1/ubuntu1804/cuda10.0/devel"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.2-u18-gl_push:
+    variables:
+        VERSION: "3.1-gl-devel-cuda10.2-ubuntu18.04"
+        IMAGE_PATH: "3.1/ubuntu1804/cuda10.2/devel-gl"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.2-u18_push:
+    variables:
+        VERSION: "3.1-devel-cuda10.2-ubuntu18.04"
+        IMAGE_PATH: "3.1/ubuntu1804/cuda10.2/devel"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.0-u18-ros_push:
+    variables:
+        VERSION: "3.1-ros-devel-cuda10.0-ubuntu18.04"
+        IMAGE_PATH: "3.1/ubuntu1804/cuda10.0/devel-ros"
+    when: manual
+    <<: *build_image_push_definition
+#
+v3.1-cuda9.0-u16-run_push:
+    variables:
+        VERSION: "3.1-runtime-cuda9.0-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda9.0/runtime"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.0-u16-run_push:
+    variables:
+        VERSION: "3.1-runtime-cuda10.0-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda10.0/runtime"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.2-u16-run_push:
+    variables:
+        VERSION: "3.1-runtime-cuda10.2-ubuntu16.04"
+        IMAGE_PATH: "3.1/ubuntu1604/cuda10.2/runtime"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.0-u18-run_push:
+    variables:
+        VERSION: "3.1-runtime-cuda10.0-ubuntu18.04"
+        IMAGE_PATH: "3.1/ubuntu1804/cuda10.0/runtime"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.1-cuda10.2-u18-run_push:
+    variables:
+        VERSION: "3.1-runtime-cuda10.2-ubuntu18.04"
+        IMAGE_PATH: "3.1/ubuntu1804/cuda10.2/runtime"
+    when: manual
+    <<: *build_image_push_definition
+
+
+##### 3.0
 v3.0-cuda9.0-u16-gl_push:
     variables:
         VERSION: "3.0-gl-devel-cuda9.0-ubuntu16.04"

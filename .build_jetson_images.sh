@@ -1,137 +1,264 @@
 push_images=true
 build_latest_only_images=true
 
-######### 3.0
+
+######### 3.1
 
 ### 4.2
-cd 3.0/l4t/jetpack_4.2/devel
-docker build -t stereolabs/zed:3.0-devel-jetson-jp4.2.1 .
+cd 3.1/l4t/jetpack_4.2/devel
+docker build -t stereolabs/zed:3.1-devel-jetson-jp4.2.1 .
 # aliases
-docker build -t stereolabs/zed:3.0-devel-l4t-r32.2.1 . 
-docker build -t stereolabs/zed:3.0-devel-jetson-jp4.2 .
+docker build -t stereolabs/zed:3.1-devel-l4t-r32.2.1 . 
+docker build -t stereolabs/zed:3.1-devel-jetson-jp4.2 .
 if $push_images; then
-    docker push stereolabs/zed:3.0-devel-jetson-jp4.2.1
-    docker push stereolabs/zed:3.0-devel-jetson-jp4.2
-    docker push stereolabs/zed:3.0-devel-l4t-r32.2.1
+    docker push stereolabs/zed:3.1-devel-jetson-jp4.2.1
+    docker push stereolabs/zed:3.1-devel-jetson-jp4.2
+    docker push stereolabs/zed:3.1-devel-l4t-r32.2.1
 fi
 
 cd ../py-devel
-docker build -t stereolabs/zed:3.0-py-devel-jetson-jp4.2.1 .
+docker build -t stereolabs/zed:3.1-py-devel-jetson-jp4.2.1 .
 # aliases
-docker build -t stereolabs/zed:3.0-py-devel-l4t-r32.2.1 . 
-docker build -t stereolabs/zed:3.0-py-devel-jetson-jp4.2 .
+docker build -t stereolabs/zed:3.1-py-devel-l4t-r32.2.1 . 
+docker build -t stereolabs/zed:3.1-py-devel-jetson-jp4.2 .
 if $push_images; then
-    docker push stereolabs/zed:3.0-py-devel-jetson-jp4.2.1
-    docker push stereolabs/zed:3.0-py-devel-jetson-jp4.2
-    docker push stereolabs/zed:3.0-py-devel-l4t-r32.2.1
+    docker push stereolabs/zed:3.1-py-devel-jetson-jp4.2.1
+    docker push stereolabs/zed:3.1-py-devel-jetson-jp4.2
+    docker push stereolabs/zed:3.1-py-devel-l4t-r32.2.1
 fi
 
 cd ../py-runtime
-docker build -t stereolabs/zed:3.0-py-runtime-jetson-jp4.2.1 .
+docker build -t stereolabs/zed:3.1-py-runtime-jetson-jp4.2.1 .
 # aliases
-docker build -t stereolabs/zed:3.0-py-runtime-l4t-r32.2.1 . 
-docker build -t stereolabs/zed:3.0-py-runtime-jetson-jp4.2 .
+docker build -t stereolabs/zed:3.1-py-runtime-l4t-r32.2.1 . 
+docker build -t stereolabs/zed:3.1-py-runtime-jetson-jp4.2 .
 if $push_images; then
-    docker push stereolabs/zed:3.0-py-runtime-jetson-jp4.2.1
-    docker push stereolabs/zed:3.0-py-runtime-jetson-jp4.2
-    docker push stereolabs/zed:3.0-py-runtime-l4t-r32.2.1
+    docker push stereolabs/zed:3.1-py-runtime-jetson-jp4.2.1
+    docker push stereolabs/zed:3.1-py-runtime-jetson-jp4.2
+    docker push stereolabs/zed:3.1-py-runtime-l4t-r32.2.1
 fi
 
 cd ../runtime
-docker build -t stereolabs/zed:3.0-runtime-jetson-jp4.2.1 .
+docker build -t stereolabs/zed:3.1-runtime-jetson-jp4.2.1 .
 # aliases
-docker build -t stereolabs/zed:3.0-runtime-l4t-r32.2.1 . 
-docker build -t stereolabs/zed:3.0-runtime-jetson-jp4.2 .
+docker build -t stereolabs/zed:3.1-runtime-l4t-r32.2.1 . 
+docker build -t stereolabs/zed:3.1-runtime-jetson-jp4.2 .
 if $push_images; then
-    docker push stereolabs/zed:3.0-runtime-jetson-jp4.2.1
-    docker push stereolabs/zed:3.0-runtime-jetson-jp4.2
-    docker push stereolabs/zed:3.0-runtime-l4t-r32.2.1
+    docker push stereolabs/zed:3.1-runtime-jetson-jp4.2.1
+    docker push stereolabs/zed:3.1-runtime-jetson-jp4.2
+    docker push stereolabs/zed:3.1-runtime-l4t-r32.2.1
 fi
 
 cd ../ros-devel
-docker build -t stereolabs/zed:3.0-ros-devel-jetson-jp4.2.1 .
+docker build -t stereolabs/zed:3.1-ros-devel-jetson-jp4.2.1 .
 # aliases
-docker build -t stereolabs/zed:3.0-ros-devel-l4t-r32.2.1 . 
-docker build -t stereolabs/zed:3.0-ros-devel-jetson-jp4.2 .
+docker build -t stereolabs/zed:3.1-ros-devel-l4t-r32.2.1 . 
+docker build -t stereolabs/zed:3.1-ros-devel-jetson-jp4.2 .
 if $push_images; then
-    docker push stereolabs/zed:3.0-ros-devel-jetson-jp4.2.1
-    docker push stereolabs/zed:3.0-ros-devel-jetson-jp4.2
-    docker push stereolabs/zed:3.0-ros-devel-l4t-r32.2.1
+    docker push stereolabs/zed:3.1-ros-devel-jetson-jp4.2.1
+    docker push stereolabs/zed:3.1-ros-devel-jetson-jp4.2
+    docker push stereolabs/zed:3.1-ros-devel-l4t-r32.2.1
 fi
 
 cd ../tools-devel
-docker build -t stereolabs/zed:3.0-tools-devel-jetson-jp4.2.1 .
+docker build -t stereolabs/zed:3.1-tools-devel-jetson-jp4.2.1 .
 # aliases
-docker build -t stereolabs/zed:3.0-tools-devel-l4t-r32.2.1 . 
-docker build -t stereolabs/zed:3.0-tools-devel-jetson-jp4.2 .
+docker build -t stereolabs/zed:3.1-tools-devel-l4t-r32.2.1 . 
+docker build -t stereolabs/zed:3.1-tools-devel-jetson-jp4.2 .
 if $push_images; then
-    docker push stereolabs/zed:3.0-tools-devel-jetson-jp4.2.1
-    docker push stereolabs/zed:3.0-tools-devel-jetson-jp4.2
-    docker push stereolabs/zed:3.0-tools-devel-l4t-r32.2.1
+    docker push stereolabs/zed:3.1-tools-devel-jetson-jp4.2.1
+    docker push stereolabs/zed:3.1-tools-devel-jetson-jp4.2
+    docker push stereolabs/zed:3.1-tools-devel-l4t-r32.2.1
 fi
 
 
 ### 4.3
 cd ../../jetpack_4.3/devel
-docker build -t stereolabs/zed:3.0-devel-jetson-jp4.3 .
+docker build -t stereolabs/zed:3.1-devel-jetson-jp4.3 .
 # aliases
-docker build -t stereolabs/zed:3.0-devel-l4t-r32.3.1 . 
+docker build -t stereolabs/zed:3.1-devel-l4t-r32.3.1 . 
 if $push_images; then
-    docker push stereolabs/zed:3.0-devel-jetson-jp4.3
-    docker push stereolabs/zed:3.0-devel-l4t-r32.3.1
+    docker push stereolabs/zed:3.1-devel-jetson-jp4.3
+    docker push stereolabs/zed:3.1-devel-l4t-r32.3.1
 fi
 
 cd ../py-devel
-docker build -t stereolabs/zed:3.0-py-devel-jetson-jp4.3 .
+docker build -t stereolabs/zed:3.1-py-devel-jetson-jp4.3 .
 # aliases
-docker build -t stereolabs/zed:3.0-py-devel-l4t-r32.3.1 . 
+docker build -t stereolabs/zed:3.1-py-devel-l4t-r32.3.1 . 
 if $push_images; then
-    docker push stereolabs/zed:3.0-py-devel-jetson-jp4.3
-    docker push stereolabs/zed:3.0-py-devel-l4t-r32.3.1
+    docker push stereolabs/zed:3.1-py-devel-jetson-jp4.3
+    docker push stereolabs/zed:3.1-py-devel-l4t-r32.3.1
 fi
 
 cd ../py-runtime
-docker build -t stereolabs/zed:3.0-py-runtime-jetson-jp4.3 .
+docker build -t stereolabs/zed:3.1-py-runtime-jetson-jp4.3 .
 # aliases
-docker build -t stereolabs/zed:3.0-py-runtime-l4t-r32.3.1 . 
+docker build -t stereolabs/zed:3.1-py-runtime-l4t-r32.3.1 . 
 if $push_images; then
-    docker push stereolabs/zed:3.0-py-runtime-jetson-jp4.3
-    docker push stereolabs/zed:3.0-py-runtime-l4t-r32.3.1
+    docker push stereolabs/zed:3.1-py-runtime-jetson-jp4.3
+    docker push stereolabs/zed:3.1-py-runtime-l4t-r32.3.1
 fi
 
 cd ../runtime
-docker build -t stereolabs/zed:3.0-runtime-jetson-jp4.3 .
+docker build -t stereolabs/zed:3.1-runtime-jetson-jp4.3 .
 # aliases
-docker build -t stereolabs/zed:3.0-runtime-l4t-r32.3.1 . 
+docker build -t stereolabs/zed:3.1-runtime-l4t-r32.3.1 . 
 if $push_images; then
-    docker push stereolabs/zed:3.0-runtime-jetson-jp4.3
-    docker push stereolabs/zed:3.0-runtime-l4t-r32.3.1
+    docker push stereolabs/zed:3.1-runtime-jetson-jp4.3
+    docker push stereolabs/zed:3.1-runtime-l4t-r32.3.1
 fi
 
 cd ../ros-devel
-docker build -t stereolabs/zed:3.0-ros-devel-jetson-jp4.3 .
+docker build -t stereolabs/zed:3.1-ros-devel-jetson-jp4.3 .
 # aliases
-docker build -t stereolabs/zed:3.0-ros-devel-l4t-r32.3.1 . 
+docker build -t stereolabs/zed:3.1-ros-devel-l4t-r32.3.1 . 
 if $push_images; then
-    docker push stereolabs/zed:3.0-ros-devel-jetson-jp4.3
-    docker push stereolabs/zed:3.0-ros-devel-l4t-r32.3.1
+    docker push stereolabs/zed:3.1-ros-devel-jetson-jp4.3
+    docker push stereolabs/zed:3.1-ros-devel-l4t-r32.3.1
 fi
 
 cd ../tools-devel
-docker build -t stereolabs/zed:3.0-tools-devel-jetson-jp4.3 .
+docker build -t stereolabs/zed:3.1-tools-devel-jetson-jp4.3 .
 # aliases
-docker build -t stereolabs/zed:3.0-tools-devel-l4t-r32.3.1 . 
+docker build -t stereolabs/zed:3.1-tools-devel-l4t-r32.3.1 . 
 if $push_images; then
-    docker push stereolabs/zed:3.0-tools-devel-jetson-jp4.3
-    docker push stereolabs/zed:3.0-tools-devel-l4t-r32.3.1
+    docker push stereolabs/zed:3.1-tools-devel-jetson-jp4.3
+    docker push stereolabs/zed:3.1-tools-devel-l4t-r32.3.1
 fi
 cd ../../../../
+
+######### 3.0
+if ! $build_latest_only_images; then
+
+    ### 4.2
+    cd 3.0/l4t/jetpack_4.2/devel
+    docker build -t stereolabs/zed:3.0-devel-jetson-jp4.2.1 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-devel-l4t-r32.2.1 . 
+    docker build -t stereolabs/zed:3.0-devel-jetson-jp4.2 .
+    if $push_images; then
+        docker push stereolabs/zed:3.0-devel-jetson-jp4.2.1
+        docker push stereolabs/zed:3.0-devel-jetson-jp4.2
+        docker push stereolabs/zed:3.0-devel-l4t-r32.2.1
+    fi
+
+    cd ../py-devel
+    docker build -t stereolabs/zed:3.0-py-devel-jetson-jp4.2.1 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-py-devel-l4t-r32.2.1 . 
+    docker build -t stereolabs/zed:3.0-py-devel-jetson-jp4.2 .
+    if $push_images; then
+        docker push stereolabs/zed:3.0-py-devel-jetson-jp4.2.1
+        docker push stereolabs/zed:3.0-py-devel-jetson-jp4.2
+        docker push stereolabs/zed:3.0-py-devel-l4t-r32.2.1
+    fi
+
+    cd ../py-runtime
+    docker build -t stereolabs/zed:3.0-py-runtime-jetson-jp4.2.1 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-py-runtime-l4t-r32.2.1 . 
+    docker build -t stereolabs/zed:3.0-py-runtime-jetson-jp4.2 .
+    if $push_images; then
+        docker push stereolabs/zed:3.0-py-runtime-jetson-jp4.2.1
+        docker push stereolabs/zed:3.0-py-runtime-jetson-jp4.2
+        docker push stereolabs/zed:3.0-py-runtime-l4t-r32.2.1
+    fi
+
+    cd ../runtime
+    docker build -t stereolabs/zed:3.0-runtime-jetson-jp4.2.1 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-runtime-l4t-r32.2.1 . 
+    docker build -t stereolabs/zed:3.0-runtime-jetson-jp4.2 .
+    if $push_images; then
+        docker push stereolabs/zed:3.0-runtime-jetson-jp4.2.1
+        docker push stereolabs/zed:3.0-runtime-jetson-jp4.2
+        docker push stereolabs/zed:3.0-runtime-l4t-r32.2.1
+    fi
+
+    cd ../ros-devel
+    docker build -t stereolabs/zed:3.0-ros-devel-jetson-jp4.2.1 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-ros-devel-l4t-r32.2.1 . 
+    docker build -t stereolabs/zed:3.0-ros-devel-jetson-jp4.2 .
+    if $push_images; then
+        docker push stereolabs/zed:3.0-ros-devel-jetson-jp4.2.1
+        docker push stereolabs/zed:3.0-ros-devel-jetson-jp4.2
+        docker push stereolabs/zed:3.0-ros-devel-l4t-r32.2.1
+    fi
+
+    cd ../tools-devel
+    docker build -t stereolabs/zed:3.0-tools-devel-jetson-jp4.2.1 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-tools-devel-l4t-r32.2.1 . 
+    docker build -t stereolabs/zed:3.0-tools-devel-jetson-jp4.2 .
+    if $push_images; then
+        docker push stereolabs/zed:3.0-tools-devel-jetson-jp4.2.1
+        docker push stereolabs/zed:3.0-tools-devel-jetson-jp4.2
+        docker push stereolabs/zed:3.0-tools-devel-l4t-r32.2.1
+    fi
+
+
+    ### 4.3
+    cd ../../jetpack_4.3/devel
+    docker build -t stereolabs/zed:3.0-devel-jetson-jp4.3 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-devel-l4t-r32.3.1 . 
+    if $push_images; then
+        docker push stereolabs/zed:3.0-devel-jetson-jp4.3
+        docker push stereolabs/zed:3.0-devel-l4t-r32.3.1
+    fi
+
+    cd ../py-devel
+    docker build -t stereolabs/zed:3.0-py-devel-jetson-jp4.3 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-py-devel-l4t-r32.3.1 . 
+    if $push_images; then
+        docker push stereolabs/zed:3.0-py-devel-jetson-jp4.3
+        docker push stereolabs/zed:3.0-py-devel-l4t-r32.3.1
+    fi
+
+    cd ../py-runtime
+    docker build -t stereolabs/zed:3.0-py-runtime-jetson-jp4.3 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-py-runtime-l4t-r32.3.1 . 
+    if $push_images; then
+        docker push stereolabs/zed:3.0-py-runtime-jetson-jp4.3
+        docker push stereolabs/zed:3.0-py-runtime-l4t-r32.3.1
+    fi
+
+    cd ../runtime
+    docker build -t stereolabs/zed:3.0-runtime-jetson-jp4.3 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-runtime-l4t-r32.3.1 . 
+    if $push_images; then
+        docker push stereolabs/zed:3.0-runtime-jetson-jp4.3
+        docker push stereolabs/zed:3.0-runtime-l4t-r32.3.1
+    fi
+
+    cd ../ros-devel
+    docker build -t stereolabs/zed:3.0-ros-devel-jetson-jp4.3 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-ros-devel-l4t-r32.3.1 . 
+    if $push_images; then
+        docker push stereolabs/zed:3.0-ros-devel-jetson-jp4.3
+        docker push stereolabs/zed:3.0-ros-devel-l4t-r32.3.1
+    fi
+
+    cd ../tools-devel
+    docker build -t stereolabs/zed:3.0-tools-devel-jetson-jp4.3 .
+    # aliases
+    docker build -t stereolabs/zed:3.0-tools-devel-l4t-r32.3.1 . 
+    if $push_images; then
+        docker push stereolabs/zed:3.0-tools-devel-jetson-jp4.3
+        docker push stereolabs/zed:3.0-tools-devel-l4t-r32.3.1
+    fi
+    cd ../../../../
 
 
 
 
 ######### 2.8
-if ! $build_latest_only_images; then
     cd 2.8/l4t/jetpack_4.2/devel
     docker build -t stereolabs/zed:2.8-devel-jetson-jp4.2.1 .
     # aliases
