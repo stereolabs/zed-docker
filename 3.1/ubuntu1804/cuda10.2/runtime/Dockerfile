@@ -11,7 +11,7 @@ RUN apt-get update -y && apt-get install --no-install-recommends lsb-release wge
     rm -rf /var/lib/apt/lists/*
 
 # ZED Python API
-RUN apt-get update -y && apt-get install --no-install-recommends python3 python3-pip -y && \ 
+RUN apt-get update -y && apt-get install --no-install-recommends libgomp1 python3 python3-pip -y && \ 
     wget download.stereolabs.com/zedsdk/pyzed -O /usr/local/zed/get_python_api.py && \
     python3 /usr/local/zed/get_python_api.py && \
     python3 -m pip install numpy opencv-python *.whl && \
