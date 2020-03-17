@@ -27,11 +27,21 @@ The images are built with [Gitlab CI](https://gitlab.com/bot-stereolabs/docker-z
 
 ---
 
-When using the **object detection module**, a volume should be used to store the model and optimized model to avoid re-downloading it and re-optimizing it every time. 
+When using the **object detection module**, a volume should be used to store the model and optimized model to avoid re-downloading it and re-optimizing it every time.
 
     docker run --gpus all -it --privileged -v /usr/local/zed/resources:/usr/local/zed/resources stereolabs/zed:3.0-runtime-cuda10.0-ubuntu18.04
 
 Note : On the host it can point to an other folder than `/usr/local/zed/resources` (for instance `-v /mnt/SSD/zed_data:/usr/local/zed/resources`)
+
+### Network support
+
+By default the host networks are not accessible from a docker container, they're isolated while keeping an external connection (like internet access), it's a bridge. To remove network isolation, for instance, to use the ZED streaming sample, the `network` option needs to be set to `host` :
+
+```
+docker run --gpus all -it --privileged --network=host stereolabs/zed:3.0-runtime-cuda10.0-ubuntu18.04
+```
+
+There are other network options, refer to [the docker network documentation](https://docs.docker.com/network/) for more information.
 
 ### Display support
 
