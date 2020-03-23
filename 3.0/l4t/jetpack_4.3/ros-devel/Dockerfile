@@ -21,7 +21,7 @@ RUN apt-get update -y && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
     apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install ros-melodic-desktop-full python-rosinstall python-rosinstall-generator python-wstool build-essential nano \
-        cmake usbutils git -y --allow-unauthenticated && \
+        cmake usbutils git python-rosdep -y --allow-unauthenticated && \
     rm -rf /var/lib/apt/lists/*
 
 RUN adduser --gecos "ROS User" --home /home/ros --disabled-password ros && \

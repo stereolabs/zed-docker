@@ -22,6 +22,7 @@ RUN apt-get update -y && \
     apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install ros-melodic-ros-base python-rosinstall python-rosinstall-generator python-wstool build-essential nano \
         cmake usbutils git -y --allow-unauthenticated && \
+    rosdep init && \
     adduser --gecos "ROS User" --home /home/ros --disabled-password ros && \
     usermod -a -G dialout ros && \
     echo "ros ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_aptget && \
@@ -32,7 +33,7 @@ RUN apt-get update -y && \
 USER ros
 
 # setup ros env
-RUN sudo rosdep init && rosdep update && echo "source \"/opt/ros/melodic/setup.bash\"" >> /home/ros/.bashrc && \
+RUN rosdep update && echo "source \"/opt/ros/melodic/setup.bash\"" >> /home/ros/.bashrc && \
     mkdir /home/ros/src
 
 RUN cd /home/ros/src && \
