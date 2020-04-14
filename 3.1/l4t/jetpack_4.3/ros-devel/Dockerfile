@@ -1,5 +1,5 @@
 #https://ngc.nvidia.com/catalog/containers/nvidia:l4t-base
-FROM stereolabs/zed:3.1-ros-devel-jetson-jp4.3
+FROM stereolabs/zed:3.1-devel-jetson-jp4.3
 
 ENV LOGNAME root
 ENV ROS_DISTRO melodic
