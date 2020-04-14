@@ -2,7 +2,7 @@
 FROM stereolabs/zed:3.1-devel-cuda9.0-ubuntu16.04
 
 ENV LOGNAME root
-ENV ROS_DISTRO melodic
+ENV ROS_DISTRO kinetic
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
