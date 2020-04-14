@@ -1,5 +1,5 @@
 #https://ngc.nvidia.com/catalog/containers/nvidia:l4t-base
-FROM stereolabs/zed:3.1-devel-jetson-jp4.3
+FROM stereolabs/zed:3.1-ros-devel-jetson-jp4.3
 
 ENV LOGNAME root
 ENV ROS_DISTRO melodic
@@ -25,15 +25,20 @@ RUN rosdep init && \
 
 WORKDIR $ROS_WS
 
+COPY ./src/subscriber_pkg /$ROS_WS/src/subscriber_pkg
+ 
 RUN cd src ; git clone https://github.com/stereolabs/zed-ros-wrapper.git && \
+    git clone https://github.com/stereolabs/zed-ros-examples.git && \
     cd .. ; apt-get update -y && \
     . /opt/ros/$ROS_DISTRO/setup.sh && \
     rosdep install --from-paths $ROS_WS/src --ignore-src -r -y && \ 
     rm -rf /var/lib/apt/lists/* && \
     catkin_make -DCMAKE_BUILD_TYPE=Release -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs -DCUDA_CUDART_LIBRARY=/usr/local/cuda/lib64/stubs -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined"
 
+
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
+
