@@ -57,7 +57,7 @@ While being simple, please note that this can be a security concern, considering
 
 Then to run it :
 
-    docker run --gpus all -it --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:3.0-gl-devel-cuda10.0-ubuntu18.04
+    docker run --gpus all -it --privileged -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:3.0-gl-devel-cuda10.0-ubuntu18.04
 
 Any OpenGL tools are now able to run, for instance :
 
