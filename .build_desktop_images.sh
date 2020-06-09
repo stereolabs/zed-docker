@@ -1,3 +1,5 @@
+set -x
+
 push_images=false
 build_latest_only_images=false
 

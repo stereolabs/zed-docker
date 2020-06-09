@@ -1,3 +1,5 @@
+set -x
+
 push_images=false
 build_latest_only_images=false
 
@@ -64,7 +66,7 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                     --build-arg ZED_SDK_MINOR=${ZED_SDK_MINOR} \
                     --build-arg ROS_DISTRO_ARG=${ROS_DISTRO_ARG} \
                     --build-arg JETPACK_MAJOR=${JETPACK_MAJOR} \
-                    --build-arg JETPACK_MAJOR=${JETPACK_MINOR} \
+                    --build-arg JETPACK_MINOR=${JETPACK_MINOR} \
                     -t "stereolabs/zed:${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}" .
 
                 # aliases

@@ -1,11 +1,12 @@
 #https://ngc.nvidia.com/catalog/containers/nvidia:l4t-base
 ARG L4T_MINOR_VERSION
+
+FROM nvcr.io/nvidia/l4t-base:r32.${L4T_MINOR_VERSION}
+
 ARG ZED_SDK_MAJOR
 ARG ZED_SDK_MINOR
 ARG JETPACK_MAJOR
 ARG JETPACK_MINOR
-
-FROM nvcr.io/nvidia/l4t-base:r32.${L4T_MINOR_VERSION}
 
 #This environment variable is needed to use the streaming features on Jetson inside a container
 ENV LOGNAME root
