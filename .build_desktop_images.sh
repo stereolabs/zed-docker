@@ -1,7 +1,7 @@
 set -x
 
-push_images=false
-build_latest_only_images=false
+push_images=true
+build_latest_only_images=true
 
 ubuntu_release_year=(
   16
@@ -59,7 +59,7 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                         fi
                     fi
 
-                    TAG_VERSION="${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+                    TAG_VERSION="${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR_VERSION}.${CUDA_MINOR_VERSION}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
                     IMAGE_PATH="${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
 
                     cd "${IMAGE_PATH}"
