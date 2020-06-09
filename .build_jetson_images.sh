@@ -1,7 +1,7 @@
 set -x
 
-push_images=false
-build_latest_only_images=false
+push_images=true
+build_latest_only_images=true
 
 JETPACK_MAJOR="4"
 ROS_DISTRO_ARG="melodic"
@@ -54,7 +54,8 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                         L4T_MINOR_VERSION="4.2"
 
                         # ZED 3.2 is the first version to support JP44
-                        if [ ${zed_major_versions} -le "3" ] && [ ${zed_minor_versions} -lt "2" ]; then
+                        if [ ${ZED_SDK_MAJOR} -le "3" ] && [ ${ZED_SDK_MINOR} -lt "2" ]; then
+                            echo "Skipping ${ZED_SDK_MAJOR}.${ZED_SDK_MINOR} for JP 44"
                             continue
                         fi
                     fi
@@ -70,7 +71,13 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                     -t "stereolabs/zed:${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}" .
 
                 # aliases
-                docker build -t "stereolabs/zed:${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}" . 
+                docker build --build-arg L4T_MINOR_VERSION=${L4T_MINOR_VERSION} \
+                    --build-arg ZED_SDK_MAJOR=${ZED_SDK_MAJOR} \
+                    --build-arg ZED_SDK_MINOR=${ZED_SDK_MINOR} \
+                    --build-arg ROS_DISTRO_ARG=${ROS_DISTRO_ARG} \
+                    --build-arg JETPACK_MAJOR=${JETPACK_MAJOR} \
+                    --build-arg JETPACK_MINOR=${JETPACK_MINOR} \
+                    -t "stereolabs/zed:${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}" . 
                 if $push_images; then
                     docker push "stereolabs/zed:${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
                     docker push "stereolabs/zed:${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
