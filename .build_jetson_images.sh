@@ -11,13 +11,14 @@ zed_major_versions=(
 )
 
 zed_minor_versions=(
-  0
-  1
-  2
+  #0
+  #1
+  #2
+  3
 )
 
 jetpack_minor_versions=(
-  2
+  #2
   3
   4
 )

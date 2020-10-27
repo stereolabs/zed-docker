@@ -11,7 +11,9 @@ ARG ZED_SDK_MAJOR
 ARG ZED_SDK_MINOR
 
 ENV NVIDIA_DRIVER_CAPABILITIES \
-        ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}compute,video,utility,graphics
+    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}compute,video,utility,graphics
+
+RUN echo "Europe/Paris" > /etc/localtime ; echo "CUDA Version ${CUDA_MAJOR}.${CUDA_MINOR}.0" > /usr/local/cuda/version.txt
 
 # Setup the ZED SDK
 RUN apt-get update -y && apt-get install --no-install-recommends lsb-release wget less udev sudo build-essential cmake -y && \
@@ -19,7 +21,7 @@ RUN apt-get update -y && apt-get install --no-install-recommends lsb-release wge
     chmod +x ZED_SDK_Linux_Ubuntu${UBUNTU_RELEASE_YEAR}.run ; ./ZED_SDK_Linux_Ubuntu${UBUNTU_RELEASE_YEAR}.run silent && \
     rm ZED_SDK_Linux_Ubuntu${UBUNTU_RELEASE_YEAR}.run && \
     rm -rf /var/lib/apt/lists/*
-    
+
 # ZED Python API
 RUN apt-get update -y && apt-get install --no-install-recommends python3 python3-pip -y && \ 
     wget download.stereolabs.com/zedsdk/pyzed -O /usr/local/zed/get_python_api.py && \

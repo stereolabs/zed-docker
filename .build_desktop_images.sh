@@ -6,12 +6,15 @@ build_latest_only_images=true
 ubuntu_release_year=(
   16
   18
+  20
 )
 
 cuda_version=(
-  "9.0"
+  #"9.0"
   "10.0"
   "10.2"
+  "11.0"
+  "11.1"
 )
 
 zed_major_versions=(
@@ -22,6 +25,7 @@ zed_minor_versions=(
   0
   1
   2
+  3
 )
 
 docker_image_variant=(
@@ -56,6 +60,24 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                         # Not compatible with CUDA <= 9
                         if [ ${CUDA_MAJOR_VERSION} -le "9" ] ; then
                             continue
+                        fi
+                    elif [ ${UBUNTU_RELEASE_YEAR} == "20" ] ; then
+                        ROS_DISTRO_ARG="neotic"
+                        
+                        # Not compatible with CUDA <= 10
+                        if [ ${CUDA_MAJOR_VERSION} -le "10" ] ; then
+                            continue
+                        fi
+                    fi
+
+                    if [ ${CUDA_MAJOR_VERSION} -ge "11" ] ; then
+                        if [ ${zed_minor_versions} -lt "2" ] ; then # CUDA 11.0 was introduced with 3.2
+                            continue
+                        fi
+                        if [ ${CUDA_MINOR_VERSION} -ge "1" ] ; then
+                            if [ ${zed_minor_versions} -lt "3" ] ; then # CUDA 11.1 was introduced with 3.3
+                                continue
+                            fi
                         fi
                     fi
 
