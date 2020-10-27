@@ -25,15 +25,15 @@ RUN apt-get update -y && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
     apt-get update -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install ros-$ROS_DISTRO-ros-base python-rosinstall python-rosdep python-rosinstall-generator python-wstool build-essential nano \
-        cmake usbutils git -y --allow-unauthenticated && \
+    cmake usbutils git -y --allow-unauthenticated && \
     rm -rf /var/lib/apt/lists/*
 
 # setup ros env
 ENV ROS_WS /opt/ros_ws
 
 RUN rosdep init && \
-  rosdep update --rosdistro $ROS_DISTRO && \
-  mkdir -p $ROS_WS/src
+    rosdep update --rosdistro $ROS_DISTRO && \
+    mkdir -p $ROS_WS/src
 
 WORKDIR $ROS_WS
 

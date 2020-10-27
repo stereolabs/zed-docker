@@ -22,796 +22,358 @@ services:
 ############################
 
 # BUILD and PUSH
-##### 3.2
-v3.2-cuda9.0-u16-gl_push:
+##### 3.3
+v3.3-cuda10.0-u16-gl_push:
     variables:
-        CUDA_MAJOR: "9"
+        CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
         UBUNTU_RELEASE_YEAR: "16"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "gl-devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.2-cuda9.0-u16_push:
+v3.3-cuda10.0-u16_push:
     variables:
-        CUDA_MAJOR: "9"
+        CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
         UBUNTU_RELEASE_YEAR: "16"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.2-cuda9.0-u16-ros_push:
-    variables:
-        CUDA_MAJOR: "9"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
-        ROS_DISTRO_ARG: "kinetic"
-        IMAGE_VARIANT: "ros-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.2-cuda10.0-u16-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.2-cuda10.0-u16_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.2-cuda10.2-u16-gl_push:
+v3.3-cuda10.2-u16-gl_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
         UBUNTU_RELEASE_YEAR: "16"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "gl-devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.2-cuda10.2-u16_push:
+v3.3-cuda10.2-u16_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
         UBUNTU_RELEASE_YEAR: "16"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.2-cuda10.0-u18-gl_push:
+v3.3-cuda11.0-u16-gl_push:
     variables:
-        CUDA_MAJOR: "10"
+        CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
+        UBUNTU_RELEASE_YEAR: "16"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "gl-devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.2-cuda10.0-u18_push:
+v3.3-cuda11.0-u16_push:
     variables:
-        CUDA_MAJOR: "10"
+        CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
+        UBUNTU_RELEASE_YEAR: "16"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.2-cuda10.2-u18-gl_push:
+v3.3-cuda11.1-u16-gl_push:
     variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "18"
+        CUDA_MAJOR: "11"
+        CUDA_MINOR: "1"
+        UBUNTU_RELEASE_YEAR: "16"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "gl-devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.2-cuda10.2-u18_push:
+v3.3-cuda11.1-u16_push:
     variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "18"
+        CUDA_MAJOR: "11"
+        CUDA_MINOR: "1"
+        UBUNTU_RELEASE_YEAR: "16"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.2-cuda10.0-u18-ros_push:
+v3.3-cuda10.0-u16-run_push:
+    variables:
+        CUDA_MAJOR: "10"
+        CUDA_MINOR: "0"
+        UBUNTU_RELEASE_YEAR: "16"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "runtime"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.3-cuda10.2-u16-run_push:
+    variables:
+        CUDA_MAJOR: "10"
+        CUDA_MINOR: "2"
+        UBUNTU_RELEASE_YEAR: "16"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "runtime"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.3-cuda11.0-u16-run_push:
+    variables:
+        CUDA_MAJOR: "11"
+        CUDA_MINOR: "0"
+        UBUNTU_RELEASE_YEAR: "16"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "runtime"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.3-cuda11.1-u16-run_push:
+    variables:
+        CUDA_MAJOR: "11"
+        CUDA_MINOR: "1"
+        UBUNTU_RELEASE_YEAR: "16"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "runtime"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+        
+v3.3-cuda10.0-u18-gl_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "gl-devel"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.3-cuda10.0-u18_push:
+    variables:
+        CUDA_MAJOR: "10"
+        CUDA_MINOR: "0"
+        UBUNTU_RELEASE_YEAR: "18"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "devel"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.3-cuda10.2-u18-gl_push:
+    variables:
+        CUDA_MAJOR: "10"
+        CUDA_MINOR: "2"
+        UBUNTU_RELEASE_YEAR: "18"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "gl-devel"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.3-cuda10.2-u18_push:
+    variables:
+        CUDA_MAJOR: "10"
+        CUDA_MINOR: "2"
+        UBUNTU_RELEASE_YEAR: "18"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "devel"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.3-cuda10.0-u18-ros_push:
+    variables:
+        CUDA_MAJOR: "10"
+        CUDA_MINOR: "0"
+        UBUNTU_RELEASE_YEAR: "18"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
         ROS_DISTRO_ARG: "melodic"
         IMAGE_VARIANT: "ros-devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
-#
-v3.2-cuda9.0-u16-run_push:
-    variables:
-        CUDA_MAJOR: "9"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
 
-v3.2-cuda10.0-u16-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.2-cuda10.2-u16-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.2-cuda10.0-u18-run_push:
+v3.3-cuda10.0-u18-run_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "runtime"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.2-cuda10.2-u18-run_push:
+v3.3-cuda10.2-u18-run_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "2"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "runtime"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-
-##### 3.1
-v3.1-cuda9.0-u16-gl_push:
+v3.3-cuda11.0-u18-run_push:
     variables:
-        CUDA_MAJOR: "9"
+        CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
+        UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "gl-devel"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "runtime"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.1-cuda9.0-u16_push:
+v3.3-cuda11.1-u18-run_push:
     variables:
-        CUDA_MAJOR: "9"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
+        CUDA_MAJOR: "11"
+        CUDA_MINOR: "1"
+        UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "runtime"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+    
+
+## U 20
+
+v3.3-cuda11.0-u20_push:
+    variables:
+        CUDA_MAJOR: "11"
+        CUDA_MINOR: "0"
+        UBUNTU_RELEASE_YEAR: "20"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.1-cuda9.0-u16-ros_push:
+v3.3-cuda11.0-u20-gl_push:
     variables:
-        CUDA_MAJOR: "9"
+        CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
+        UBUNTU_RELEASE_YEAR: "20"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        ROS_DISTRO_ARG: "kinetic"
-        IMAGE_VARIANT: "ros-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.0-u16-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "gl-devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.1-cuda10.0-u16_push:
+v3.3-cuda11.0-u20-run_push:
     variables:
-        CUDA_MAJOR: "10"
+        CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
+        UBUNTU_RELEASE_YEAR: "20"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
+        ZED_SDK_MINOR: "3"
+        IMAGE_VARIANT: "runtime"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_definition
+
+v3.3-cuda11.1-u20_push:
+    variables:
+        CUDA_MAJOR: "11"
+        CUDA_MINOR: "1"
+        UBUNTU_RELEASE_YEAR: "20"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.1-cuda10.2-u16-gl_push:
+v3.3-cuda11.1-u20-gl_push:
     variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
+        CUDA_MAJOR: "11"
+        CUDA_MINOR: "1"
+        UBUNTU_RELEASE_YEAR: "20"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "gl-devel"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.1-cuda10.2-u16_push:
+v3.3-cuda11.1-u20-run_push:
     variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
+        CUDA_MAJOR: "11"
+        CUDA_MINOR: "1"
+        UBUNTU_RELEASE_YEAR: "20"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.0-u18-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.0-u18_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.2-u18-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.2-u18_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.0-u18-ros_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        ROS_DISTRO_ARG: "melodic"
-        IMAGE_VARIANT: "ros-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-#
-v3.1-cuda9.0-u16-run_push:
-    variables:
-        CUDA_MAJOR: "9"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
+        ZED_SDK_MINOR: "3"
         IMAGE_VARIANT: "runtime"
         VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
         IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.0-u16-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.2-u16-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.0-u18-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.1-cuda10.2-u18-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "1"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-##### 3.0
-v3.0-cuda9.0-u16-gl_push:
-    variables:
-        CUDA_MAJOR: "9"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda9.0-u16_push:
-    variables:
-        CUDA_MAJOR: "9"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda9.0-u16-ros_push:
-    variables:
-        CUDA_MAJOR: "9"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        ROS_DISTRO_ARG: "kinetic"
-        IMAGE_VARIANT: "ros-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.0-u16-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.0-u16_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.2-u16-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.2-u16_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.0-u18-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.0-u18_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.2-u18-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.2-u18_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.0-u18-ros_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        ROS_DISTRO_ARG: "melodic"
-        IMAGE_VARIANT: "ros-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-#
-v3.0-cuda9.0-u16-run_push:
-    variables:
-        CUDA_MAJOR: "9"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.0-u16-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.2-u16-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.0-u18-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.0-cuda10.2-u18-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "0"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-
-#2.8
-v2.8-cuda9.0-u16-gl_push:
-    variables:
-        VERSION: "2.8-gl-devel-cuda9.0-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/devel-gl"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda9.0-u16_push:
-    variables:
-        VERSION: "2.8-devel-cuda9.0-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/devel"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda9.0-u16-ros_push:
-    variables:
-        VERSION: "2.8-ros-cuda9.0-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/ros"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.0-u16-gl_push:
-    variables:
-        VERSION: "2.8-gl-devel-cuda10.0-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda10.0/devel-gl"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.0-u16_push:
-    variables:
-        VERSION: "2.8-devel-cuda10.0-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda10.0/devel"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.2-u16-gl_push:
-    variables:
-        VERSION: "2.8-gl-devel-cuda10.2-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda10.2/devel-gl"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.2-u16_push:
-    variables:
-        VERSION: "2.8-devel-cuda10.2-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda10.2/devel"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.0-u18-gl_push:
-    variables:
-        VERSION: "2.8-gl-devel-cuda10.0-ubuntu18.04"
-        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/devel-gl"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.0-u18_push:
-    variables:
-        VERSION: "2.8-devel-cuda10.0-ubuntu18.04"
-        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/devel"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.2-u18-gl_push:
-    variables:
-        VERSION: "2.8-gl-devel-cuda10.2-ubuntu18.04"
-        IMAGE_PATH: "2.8/ubuntu1804/cuda10.2/devel-gl"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.2-u18_push:
-    variables:
-        VERSION: "2.8-devel-cuda10.2-ubuntu18.04"
-        IMAGE_PATH: "2.8/ubuntu1804/cuda10.2/devel"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.0-u18-ros_push:
-    variables:
-        VERSION: "2.8-ros-cuda10.0-ubuntu18.04"
-        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/ros"
-    when: manual
-    <<: *build_image_push_definition
-#
-v2.8-cuda9.0-u16-run_push:
-    variables:
-        VERSION: "2.8-runtime-cuda9.0-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda9.0/runtime"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.0-u16-run_push:
-    variables:
-        VERSION: "2.8-runtime-cuda10.0-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda10.0/runtime"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.2-u16-run_push:
-    variables:
-        VERSION: "2.8-runtime-cuda10.2-ubuntu16.04"
-        IMAGE_PATH: "2.8/ubuntu1604/cuda10.2/runtime"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.0-u18-run_push:
-    variables:
-        VERSION: "2.8-runtime-cuda10.0-ubuntu18.04"
-        IMAGE_PATH: "2.8/ubuntu1804/cuda10.0/runtime"
-    when: manual
-    <<: *build_image_push_definition
-
-v2.8-cuda10.2-u18-run_push:
-    variables:
-        VERSION: "2.8-runtime-cuda10.2-ubuntu18.04"
-        IMAGE_PATH: "2.8/ubuntu1804/cuda10.2/runtime"
     when: manual
     <<: *build_image_push_definition
