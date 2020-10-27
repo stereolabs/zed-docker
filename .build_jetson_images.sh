@@ -51,7 +51,7 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                     elif [ ${JETPACK_MINOR} == "3" ] ; then # 43
                         L4T_MINOR_VERSION="3.1"
                     elif [ ${JETPACK_MINOR} == "4" ] ; then # 44
-                        L4T_MINOR_VERSION="4.2"
+                        L4T_MINOR_VERSION="4.3"
 
                         # ZED 3.2 is the first version to support JP44
                         if [ ${ZED_SDK_MAJOR} -le "3" ] && [ ${ZED_SDK_MINOR} -lt "2" ]; then
