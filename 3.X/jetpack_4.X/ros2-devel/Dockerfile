@@ -1,12 +1,12 @@
 #https://ngc.nvidia.com/catalog/containers/nvidia:l4t-base
-ARG ZED_SDK_MAJOR=3
-ARG ZED_SDK_MINOR=3
-ARG JETPACK_MAJOR=4
-ARG JETPACK_MINOR=4
+ARG ZED_SDK_MAJOR
+ARG ZED_SDK_MINOR
+ARG JETPACK_MAJOR
+ARG JETPACK_MINOR
 
 FROM stereolabs/zed:${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-devel-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}
 
-ARG ROS2_DISTRO_ARG=eloquent
+ARG ROS2_DISTRO_ARG
 ARG L4T_MINOR_VERSION
 
 ENV LOGNAME root
@@ -37,7 +37,7 @@ RUN cd src ; git clone https://github.com/stereolabs/zed-ros2-wrapper.git && \
     cd .. ; apt-get update -y && \
     . /opt/ros/$ROS2_DISTRO/setup.sh && \
     rosdep install --from-paths src --ignore-src -r -y && \
-    colcon build --symlink-install --cmake-args " -DCMAKE_BUILD_TYPE=Release" " -DCUDA_CUDART_LIBRARY=/usr/local/cuda/lib64/stubs" " -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs" " -DCMAKE_CXX_FLAGS='-Wl,--allow-shlib-undefined'"
+    colcon build --symlink-install --cmake-args " -DCMAKE_BUILD_TYPE=Release" " -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs" " -DCUDA_CUDART_LIBRARY=/usr/local/cuda/lib64/stubs" " -DCMAKE_CXX_FLAGS='-Wl,--allow-shlib-undefined'"
 
 
 # setup entrypoint
