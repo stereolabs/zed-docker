@@ -187,5 +187,7 @@ The tools are using OpenGL libraries. The "`gl`" images are therefore required t
 
 ## Contributing
 
-This is a first version of docker images for the ZED.
 Feel free to open an issue if you find a bug, or a pull request for bug fixes, features or other improvements.
+
+## Support
+If you need assistance go to our Community site at https://community.stereolabs.com/
