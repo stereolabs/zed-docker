@@ -22,10 +22,11 @@ zed_major_versions=(
 )
 
 zed_minor_versions=(
-  0
-  1
-  2
-  3
+  #0
+  #1
+  #2
+  #3
+  4
 )
 
 docker_image_variant=(
@@ -36,6 +37,8 @@ docker_image_variant=(
 )
 
 pwd_path=$(pwd)
+rm build_log.txt
+touch build_log.txt
 
 for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
     for ZED_SDK_MINOR in "${zed_minor_versions[@]}" ; do
@@ -71,11 +74,11 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                     fi
 
                     if [ ${CUDA_MAJOR_VERSION} -ge "11" ] ; then
-                        if [ ${zed_minor_versions} -lt "2" ] ; then # CUDA 11.0 was introduced with 3.2
+                        if [ ${ZED_SDK_MINOR} -lt "2" ] ; then # CUDA 11.0 was introduced with 3.2
                             continue
                         fi
                         if [ ${CUDA_MINOR_VERSION} -ge "1" ] ; then
-                            if [ ${zed_minor_versions} -lt "3" ] ; then # CUDA 11.1 was introduced with 3.3
+                            if [ ${ZED_SDK_MINOR} -lt "3" ] ; then # CUDA 11.1 was introduced with 3.3
                                 continue
                             fi
                         fi
@@ -86,7 +89,7 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
 
                     cd "${IMAGE_PATH}"
 
-                    echo "Building 'stereolabs/zed:${TAG_VERSION}'"
+                    echo "Building 'stereolabs/zed:${TAG_VERSION}'" | tee -a "${pwd_path}/build_log.txt"
 
                     docker build --build-arg UBUNTU_RELEASE_YEAR=${UBUNTU_RELEASE_YEAR} \
                         --build-arg ZED_SDK_MAJOR=${ZED_SDK_MAJOR} \

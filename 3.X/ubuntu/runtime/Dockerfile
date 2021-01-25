@@ -25,6 +25,8 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get autoremove -y && \
 
 # ZED Python API
 RUN apt-get update -y && apt-get install --no-install-recommends python3 python3-pip -y && \ 
+    # https://stackoverflow.com/a/63457606/7036639
+    python3 -m pip install --upgrade pip && \  
     wget download.stereolabs.com/zedsdk/pyzed -O /usr/local/zed/get_python_api.py && \
     python3 /usr/local/zed/get_python_api.py && \
     python3 -m pip install numpy opencv-python *.whl && \
