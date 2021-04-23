@@ -8,6 +8,11 @@ services:
     - docker build -t "${CI_REGISTRY_IMAGE}:${VERSION}" "${IMAGE_PATH}"
     except:
     - master
+    tags:
+    - shell-builder
+    - linux
+    - big-storage
+    - qemu-support
 
 .build_and_push_image_template: &build_image_push_definition
     script:
@@ -18,6 +23,11 @@ services:
     - docker push "${CI_REGISTRY_IMAGE}"
     only:
     - master
+    tags:
+    - shell-builder
+    - linux
+    - big-storage
+    - qemu-support
 
 ############################
 
