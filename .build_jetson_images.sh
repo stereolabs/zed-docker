@@ -14,21 +14,23 @@ zed_minor_versions=(
   #0
   #1
   #2
-  3
-  4
+  #3
+  #4
+  5
 )
 
 jetpack_minor_versions=(
   #2
   3
   4
+  5
 )
 
 docker_image_variant=(
   devel
   py-devel
   py-runtime
-  ros-devel
+  #ros-devel
   runtime
   tools-devel  
 )
@@ -58,6 +60,14 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                         # ZED 3.2 is the first version to support JP44
                         if [ ${ZED_SDK_MAJOR} -le "3" ] && [ ${ZED_SDK_MINOR} -lt "2" ]; then
                             echo "Skipping ${ZED_SDK_MAJOR}.${ZED_SDK_MINOR} for JP 44"
+                            continue
+                        fi
+                    elif [ ${JETPACK_MINOR} == "5" ] ; then # 45
+                        L4T_MINOR_VERSION="4.5"
+
+                        # ZED 3.4 is the first version to support JP45
+                        if [ ${ZED_SDK_MAJOR} -le "3" ] && [ ${ZED_SDK_MINOR} -lt "4" ]; then
+                            echo "Skipping ${ZED_SDK_MAJOR}.${ZED_SDK_MINOR} for JP 45"
                             continue
                         fi
                     fi

@@ -26,7 +26,8 @@ zed_minor_versions=(
   #1
   #2
   #3
-  4
+  #4
+  5
 )
 
 docker_image_variant=(

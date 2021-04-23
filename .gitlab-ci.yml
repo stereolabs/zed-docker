@@ -22,8 +22,8 @@ services:
 ############################
 
 # BUILD and PUSH
-##### 3.4
-v3.4-cuda10.0-u16-gl_push:
+##### 3.5
+v3.5-cuda10.0-u16-gl_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
@@ -36,7 +36,7 @@ v3.4-cuda10.0-u16-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.0-u16_push:
+v3.5-cuda10.0-u16_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
@@ -49,7 +49,7 @@ v3.4-cuda10.0-u16_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.0-u16-run_push:
+v3.5-cuda10.0-u16-run_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
@@ -62,7 +62,7 @@ v3.4-cuda10.0-u16-run_push:
     when: manual
     <<: *build_image_push_definition
     
-v3.4-cuda10.2-u16-gl_push:
+v3.5-cuda10.2-u16-gl_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
@@ -75,7 +75,7 @@ v3.4-cuda10.2-u16-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.2-u16_push:
+v3.5-cuda10.2-u16_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
@@ -88,7 +88,7 @@ v3.4-cuda10.2-u16_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.2-u16-run_push:
+v3.5-cuda10.2-u16-run_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
@@ -101,7 +101,7 @@ v3.4-cuda10.2-u16-run_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.0-u16-gl_push:
+v3.5-cuda11.0-u16-gl_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
@@ -114,7 +114,7 @@ v3.4-cuda11.0-u16-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.0-u16_push:
+v3.5-cuda11.0-u16_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
@@ -127,7 +127,7 @@ v3.4-cuda11.0-u16_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.0-u16-run_push:
+v3.5-cuda11.0-u16-run_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
@@ -140,7 +140,7 @@ v3.4-cuda11.0-u16-run_push:
     when: manual
     <<: *build_image_push_definition
     
-v3.4-cuda11.1-u16-gl_push:
+v3.5-cuda11.1-u16-gl_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "1"
@@ -153,7 +153,7 @@ v3.4-cuda11.1-u16-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.1-u16_push:
+v3.5-cuda11.1-u16_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "1"
@@ -166,7 +166,7 @@ v3.4-cuda11.1-u16_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.1-u16-run_push:
+v3.5-cuda11.1-u16-run_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "1"
@@ -180,7 +180,7 @@ v3.4-cuda11.1-u16-run_push:
     <<: *build_image_push_definition
     
 # U 18
-v3.4-cuda10.0-u18-gl_push:
+v3.5-cuda10.0-u18-gl_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
@@ -193,7 +193,7 @@ v3.4-cuda10.0-u18-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.0-u18_push:
+v3.5-cuda10.0-u18_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
@@ -206,7 +206,7 @@ v3.4-cuda10.0-u18_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.0-u18-ros_push:
+v3.5-cuda10.0-u18-ros_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
@@ -220,7 +220,7 @@ v3.4-cuda10.0-u18-ros_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.0-u18-run_push:
+v3.5-cuda10.0-u18-run_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
@@ -233,7 +233,7 @@ v3.4-cuda10.0-u18-run_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.2-u18-gl_push:
+v3.5-cuda10.2-u18-gl_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
@@ -246,7 +246,7 @@ v3.4-cuda10.2-u18-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.2-u18_push:
+v3.5-cuda10.2-u18_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
@@ -259,7 +259,7 @@ v3.4-cuda10.2-u18_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda10.2-u18-run_push:
+v3.5-cuda10.2-u18-run_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
@@ -272,7 +272,7 @@ v3.4-cuda10.2-u18-run_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.0-u18-gl_push:
+v3.5-cuda11.0-u18-gl_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
@@ -285,7 +285,7 @@ v3.4-cuda11.0-u18-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.0-u18_push:
+v3.5-cuda11.0-u18_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
@@ -298,7 +298,7 @@ v3.4-cuda11.0-u18_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.0-u18-run_push:
+v3.5-cuda11.0-u18-run_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
@@ -311,7 +311,7 @@ v3.4-cuda11.0-u18-run_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.1-u18-gl_push:
+v3.5-cuda11.1-u18-gl_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "1"
@@ -324,7 +324,7 @@ v3.4-cuda11.1-u18-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.1-u18_push:
+v3.5-cuda11.1-u18_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "1"
@@ -337,7 +337,7 @@ v3.4-cuda11.1-u18_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.1-u18-run_push:
+v3.5-cuda11.1-u18-run_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "1"
@@ -353,7 +353,7 @@ v3.4-cuda11.1-u18-run_push:
 
 ## U 20
 
-v3.4-cuda11.0-u20_push:
+v3.5-cuda11.0-u20_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
@@ -366,7 +366,7 @@ v3.4-cuda11.0-u20_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.0-u20-gl_push:
+v3.5-cuda11.0-u20-gl_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
@@ -379,7 +379,7 @@ v3.4-cuda11.0-u20-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.0-u20-run_push:
+v3.5-cuda11.0-u20-run_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "0"
@@ -392,7 +392,7 @@ v3.4-cuda11.0-u20-run_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.1-u20_push:
+v3.5-cuda11.1-u20_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "1"
@@ -405,7 +405,7 @@ v3.4-cuda11.1-u20_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.1-u20-gl_push:
+v3.5-cuda11.1-u20-gl_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "1"
@@ -418,7 +418,7 @@ v3.4-cuda11.1-u20-gl_push:
     when: manual
     <<: *build_image_push_definition
 
-v3.4-cuda11.1-u20-run_push:
+v3.5-cuda11.1-u20-run_push:
     variables:
         CUDA_MAJOR: "11"
         CUDA_MINOR: "1"
