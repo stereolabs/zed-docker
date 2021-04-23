@@ -63,7 +63,7 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                             continue
                         fi
                     elif [ ${JETPACK_MINOR} == "5" ] ; then # 45
-                        L4T_MINOR_VERSION="4.5"
+                        L4T_MINOR_VERSION="5.0"
 
                         # ZED 3.4 is the first version to support JP45
                         if [ ${ZED_SDK_MAJOR} -le "3" ] && [ ${ZED_SDK_MINOR} -lt "4" ]; then
