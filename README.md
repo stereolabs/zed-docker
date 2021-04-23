@@ -18,18 +18,17 @@ Once NVIDIA Container Toolkit is installed, make sure it runs fine by launching 
 
 All the available images can be found at [docker hub](https://hub.docker.com/r/stereolabs/zed/)
 
-    docker pull stereolabs/zed:3.0-runtime-cuda10.0-ubuntu18.04
-    docker run --gpus all -it --privileged stereolabs/zed:3.0-runtime-cuda10.0-ubuntu18.04
+    docker pull stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
+    docker run --gpus all -it --privileged stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
 
 `--privileged` option is used to pass through all the device to the docker container, it might not be very safe but provides an easy solution to connect the USB3 camera to the container.
 
-The images are built with [Gitlab CI](https://gitlab.com/bot-stereolabs/docker-zed/pipelines)
 
 ---
 
 When using the **object detection module**, a volume should be used to store the model and optimized model to avoid re-downloading it and re-optimizing it every time.
 
-    docker run --gpus all -it --privileged -v /usr/local/zed/resources:/usr/local/zed/resources stereolabs/zed:3.0-runtime-cuda10.0-ubuntu18.04
+    docker run --gpus all -it --privileged -v /usr/local/zed/resources:/usr/local/zed/resources stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
 
 Note : On the host it can point to an other folder than `/usr/local/zed/resources` (for instance `-v /mnt/SSD/zed_data:/usr/local/zed/resources`)
 
@@ -38,7 +37,7 @@ Note : On the host it can point to an other folder than `/usr/local/zed/resource
 By default the host networks are not accessible from a docker container, they're isolated while keeping an external connection (like internet access), it's a bridge. To remove network isolation, for instance, to use the ZED streaming sample, the `network` option needs to be set to `host` :
 
 ```
-docker run --gpus all -it --privileged --network=host stereolabs/zed:3.0-runtime-cuda10.0-ubuntu18.04
+docker run --gpus all -it --privileged --network=host stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
 ```
 
 There are other network options, refer to [the docker network documentation](https://docs.docker.com/network/) for more information.
@@ -47,7 +46,7 @@ There are other network options, refer to [the docker network documentation](htt
 
 A container is also available with OpenGL display support (from [nvidia/cudagl container](https://gitlab.com/nvidia/cudagl)). It is mandatory to open the tools from within an image.
 
-    docker pull stereolabs/zed:3.0-gl-devel-cuda10.0-ubuntu18.04
+    docker pull stereolabs/zed:3.4-gl-devel-cuda11.0-ubuntu18.04
 
 To run it, we need to add the right to connect to the X server :
 
@@ -57,7 +56,7 @@ While being simple, please note that this can be a security concern, considering
 
 Then to run it :
 
-    docker run --gpus all -it --privileged -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:3.0-gl-devel-cuda10.0-ubuntu18.04
+    docker run --gpus all -it --privileged -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:3.4-gl-devel-cuda11.0-ubuntu18.04
 
 Any OpenGL tools are now able to run, for instance :
 
@@ -65,22 +64,7 @@ Any OpenGL tools are now able to run, for instance :
 
 For more information on the display usage checkout the [ROS documentation about using Docker with X server](http://wiki.ros.org/docker/Tutorials/GUI).
 
-## Rebuilt or modifying the image
-
-### Build the image
-
-The images are based on cuda images from nvidia https://gitlab.com/nvidia/cuda/
-
-The cuda version can easily be changed, as the ZED SDK version.
-
-Go to the folder with the version needed and run for instance :
-
-    cd 3.0/ubuntu1804/cuda10.0/devel
-    docker build -t zed:3.0-devel-cuda10.0-ubuntu18.04 .
-
-### Run the local image
-
-    docker run --gpus all -it --privileged zed:3.0-devel-cuda10.0-ubuntu18.04
+### USB connection
 
 The camera connection can be verified using `lsusb`:
 
@@ -121,8 +105,13 @@ Testing the emulation by running a `aarch64` image on desktop :
 The installation was successful, the emulation is working. At this point we can now run `aarch64` programs on the host `x86_64` PC.
 
 ```bash
-cd 3.0/l4t/jetpack_4.3/devel
-docker build -t zed:3.0-devel-jetson-jp4.3 .
+cd 3.X/jetpack_4.X/devel
+docker build --build-arg L4T_MINOR_VERSION=4.4 \
+                    --build-arg ZED_SDK_MAJOR=3 \
+                    --build-arg ZED_SDK_MINOR=4 \
+                    --build-arg JETPACK_MAJOR=4 \
+                    --build-arg JETPACK_MINOR=4 \
+                    -t zed:3.4-devel-jetson-jp4.4 .
 ```
 
 Unfortunately it is not possible to emulate CUDA accelerated program with QEMU.
@@ -178,7 +167,7 @@ If you unplug/plug them back in, it’s technically a different mapped file for 
 For example :
 
 ```
-docker run --gpus all -it -v /dev:/dev --privileged stereolabs/zed:3.0-runtime-cuda10.0-ubuntu18.04
+docker run --gpus all -it -v /dev:/dev --privileged stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
 ```
 
 ### Using the tools
