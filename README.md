@@ -18,8 +18,8 @@ Once NVIDIA Container Toolkit is installed, make sure it runs fine by launching 
 
 All the available images can be found at [docker hub](https://hub.docker.com/r/stereolabs/zed/)
 
-    docker pull stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
-    docker run --gpus all -it --privileged stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
+    docker pull stereolabs/zed:3.5-runtime-cuda11.0-ubuntu18.04
+    docker run --gpus all -it --privileged stereolabs/zed:3.5-runtime-cuda11.0-ubuntu18.04
 
 `--privileged` option is used to pass through all the device to the docker container, it might not be very safe but provides an easy solution to connect the USB3 camera to the container.
 
@@ -28,7 +28,7 @@ All the available images can be found at [docker hub](https://hub.docker.com/r/s
 
 When using the **object detection module**, a volume should be used to store the model and optimized model to avoid re-downloading it and re-optimizing it every time.
 
-    docker run --gpus all -it --privileged -v /usr/local/zed/resources:/usr/local/zed/resources stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
+    docker run --gpus all -it --privileged -v /usr/local/zed/resources:/usr/local/zed/resources stereolabs/zed:3.5-runtime-cuda11.0-ubuntu18.04
 
 Note : On the host it can point to an other folder than `/usr/local/zed/resources` (for instance `-v /mnt/SSD/zed_data:/usr/local/zed/resources`)
 
@@ -37,7 +37,7 @@ Note : On the host it can point to an other folder than `/usr/local/zed/resource
 By default the host networks are not accessible from a docker container, they're isolated while keeping an external connection (like internet access), it's a bridge. To remove network isolation, for instance, to use the ZED streaming sample, the `network` option needs to be set to `host` :
 
 ```
-docker run --gpus all -it --privileged --network=host stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
+docker run --gpus all -it --privileged --network=host stereolabs/zed:3.5-runtime-cuda11.0-ubuntu18.04
 ```
 
 There are other network options, refer to [the docker network documentation](https://docs.docker.com/network/) for more information.
@@ -46,7 +46,7 @@ There are other network options, refer to [the docker network documentation](htt
 
 A container is also available with OpenGL display support (from [nvidia/cudagl container](https://gitlab.com/nvidia/cudagl)). It is mandatory to open the tools from within an image.
 
-    docker pull stereolabs/zed:3.4-gl-devel-cuda11.0-ubuntu18.04
+    docker pull stereolabs/zed:3.5-gl-devel-cuda11.0-ubuntu18.04
 
 To run it, we need to add the right to connect to the X server :
 
@@ -56,7 +56,7 @@ While being simple, please note that this can be a security concern, considering
 
 Then to run it :
 
-    docker run --gpus all -it --privileged -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:3.4-gl-devel-cuda11.0-ubuntu18.04
+    docker run --gpus all -it --privileged -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix stereolabs/zed:3.5-gl-devel-cuda11.0-ubuntu18.04
 
 Any OpenGL tools are now able to run, for instance :
 
@@ -77,10 +77,10 @@ The camera connection can be verified using `lsusb`:
 With the [recently added support](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) of nvidia docker, it is now possible to run the ZED SDK inside docker on Jetson. We now provide a compatible image :
 
 ```bash
-docker pull stereolabs/zed:3.0-devel-jetson-jp4.3
+docker pull stereolabs/zed:3.4-devel-jetson-jp4.5
 ```
 
-One exemple of DockerFile can be found [here](3.0/l4t/jetpack_4.2/devel/Dockerfile). The image is based on the [NVIDIA L4T image](https://ngc.nvidia.com/catalog/containers/nvidia:l4t-base).
+One exemple of DockerFile can be found [here](3.X/jetpack_4.X/devel/Dockerfile). The image is based on the [NVIDIA L4T image](https://ngc.nvidia.com/catalog/containers/nvidia:l4t-base).
 
 ### Building the image
 
@@ -159,7 +159,7 @@ The link path need to point to the CUDA stub folder, and since `nvcuvid` can be 
 
 ### USB replug/hot plug
 
-ZED-M contains a udev device for the IMU and sensors data.
+ZED-M and ZED2/ZED2i contains a udev device for the IMU and sensors data.
 On Linux, udev/serial device path are often ephemeral (will change if the device is unplugged and replugged).
 
 If you unplug/plug them back in, it’s technically a different mapped file for the device than what was mounted in, so Docker won’t see it. For this reason, a solution is to mount the entire /dev folder from the host to the container. You can do this by adding the following volume command to your Docker run command `-v /dev:/dev`
@@ -167,8 +167,10 @@ If you unplug/plug them back in, it’s technically a different mapped file for 
 For example :
 
 ```
-docker run --gpus all -it -v /dev:/dev --privileged stereolabs/zed:3.4-runtime-cuda11.0-ubuntu18.04
+docker run --gpus all -it -v /dev:/dev --privileged stereolabs/zed:3.5-runtime-cuda11.0-ubuntu18.04
 ```
+
+When not running the container in root (not using --privileged), the udev rules should be installed on the host, for instance by running the ZED SDK installer to be able to open the cameras, it may segfault otherwise. Alternatively [this script](https://gist.github.com/adujardin/2d5ce8f000fc6a7bd40bee2709749ff8) can be run.
 
 ### Using the tools
 
