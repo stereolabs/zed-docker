@@ -17,13 +17,14 @@ RUN echo "Europe/Paris" > /etc/localtime ; echo "CUDA Version ${CUDA_MAJOR}.${CU
 
 # Setup the ZED SDK
 RUN apt-get update -y && apt-get install --no-install-recommends lsb-release wget less udev sudo  build-essential cmake -y && \
-    wget -q -O ZED_SDK_Linux_Ubuntu${UBUNTU_RELEASE_YEAR}.run https://download.stereolabs.com/zedsdk/${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}/cu${CUDA_MAJOR}${CUDA_MINOR}/ubuntu${UBUNTU_RELEASE_YEAR} && \
+    wget -q -O ZED_SDK_Linux_Ubuntu${UBUNTU_RELEASE_YEAR}.run https://download.stereolabs.com/zedsdk/${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}/cu${CUDA_MAJOR}${CUDA_MINOR%.*}/ubuntu${UBUNTU_RELEASE_YEAR} && \
     chmod +x ZED_SDK_Linux_Ubuntu${UBUNTU_RELEASE_YEAR}.run ; ./ZED_SDK_Linux_Ubuntu${UBUNTU_RELEASE_YEAR}.run -- silent skip_tools && \
+    ln -s /lib/x86_64-linux-gnu/libusb-1.0.so.0 /usr/lib/x86_64-linux-gnu/libusb-1.0.so && \
     rm ZED_SDK_Linux_Ubuntu${UBUNTU_RELEASE_YEAR}.run && \
     rm -rf /var/lib/apt/lists/*
 
 # ZED Python API
-RUN apt-get update -y && apt-get install --no-install-recommends python3 python3-pip -y && \ 
+RUN apt-get update -y && apt-get install --no-install-recommends python3 python3-pip libpng-dev libgomp1 -y && \ 
     wget download.stereolabs.com/zedsdk/pyzed -O /usr/local/zed/get_python_api.py && \
     python3 /usr/local/zed/get_python_api.py && \
     python3 -m pip install numpy opencv-python *.whl && \
