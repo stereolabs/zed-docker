@@ -1,5 +1,7 @@
 set -x
 
+# This script is no longer used and maintained
+
 push_images=true
 build_latest_only_images=true
 
@@ -16,7 +18,8 @@ zed_minor_versions=(
   #2
   #3
   #4
-  5
+  #5
+  6
 )
 
 jetpack_minor_versions=(
@@ -24,6 +27,7 @@ jetpack_minor_versions=(
   3
   4
   5
+  6
 )
 
 docker_image_variant=(
@@ -68,6 +72,14 @@ for ZED_SDK_MAJOR in "${zed_major_versions[@]}" ; do
                         # ZED 3.4 is the first version to support JP45
                         if [ ${ZED_SDK_MAJOR} -le "3" ] && [ ${ZED_SDK_MINOR} -lt "4" ]; then
                             echo "Skipping ${ZED_SDK_MAJOR}.${ZED_SDK_MINOR} for JP 45"
+                            continue
+                        fi
+                    elif [ ${JETPACK_MINOR} == "6" ] ; then # 45
+                        L4T_MINOR_VERSION="6.1"
+
+                        # ZED 3.6 is the first version to support JP46
+                        if [ ${ZED_SDK_MAJOR} -le "3" ] && [ ${ZED_SDK_MINOR} -lt "6" ]; then
+                            echo "Skipping ${ZED_SDK_MAJOR}.${ZED_SDK_MINOR} for JP 46"
                             continue
                         fi
                     fi

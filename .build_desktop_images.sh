@@ -1,10 +1,12 @@
 set -x
 
+# This script is no longer used and maintained
+
 push_images=true
 build_latest_only_images=true
 
 ubuntu_release_year=(
-  16
+  #16
   18
   20
 )
@@ -13,8 +15,8 @@ cuda_version=(
   #"9.0"
   "10.0"
   "10.2"
-  "11.0"
-  "11.1"
+  #"11.0"
+  "11.5"
 )
 
 zed_major_versions=(
@@ -27,13 +29,14 @@ zed_minor_versions=(
   #2
   #3
   #4
-  5
+  #5
+  6
 )
 
 docker_image_variant=(
   devel
   gl-devel
-  ros-devel
+  #ros-devel
   runtime
 )
 

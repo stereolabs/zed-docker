@@ -1,34 +1,26 @@
 image: docker:stable
 
-services:
-    - docker:stable-dind
-
-.build_image_template: &build_image_definition
-    script:
-    - docker build -t "${CI_REGISTRY_IMAGE}:${VERSION}" "${IMAGE_PATH}"
-    except:
-    - master
-    tags:
-    - shell-builder
-    - linux
-    - big-storage
-    - qemu-support
+#services:
+#    - docker:stable-dind
 
 .build_and_push_image_template: &build_image_push_definition
+    stage: build_zed_docker
     script:
     - docker info
     - docker login -u "${REGISTRY_USER}" -p "${REGISTRY_TOKEN}"
     - docker build --no-cache --build-arg UBUNTU_RELEASE_YEAR=${UBUNTU_RELEASE_YEAR} --build-arg ZED_SDK_MAJOR=${ZED_SDK_MAJOR} --build-arg ZED_SDK_MINOR=${ZED_SDK_MINOR} --build-arg ROS_DISTRO_ARG=${ROS_DISTRO_ARG} --build-arg CUDA_MAJOR=${CUDA_MAJOR} --build-arg CUDA_MINOR=${CUDA_MINOR} -t "${CI_REGISTRY_IMAGE}:${VERSION}" "${IMAGE_PATH}"
     - docker tag "${CI_REGISTRY_IMAGE}:${VERSION}" "${CI_REGISTRY_IMAGE}:${VERSION}";
     - docker push "${CI_REGISTRY_IMAGE}:${VERSION}"
-    only:
-    - master
+    #only:
+    #- tags
     tags:
     - shell-builder
     - linux
     - big-storage
+    dependencies: []
 
 .build_and_push_image_jetson_template: &build_image_push_jetson_definition
+    stage: build_zed_docker
     script:
     - docker info
     - docker login -u "${REGISTRY_USER}" -p "${REGISTRY_TOKEN}"
@@ -38,639 +30,476 @@ services:
     - docker tag "${CI_REGISTRY_IMAGE}:${VERSION2}" "${CI_REGISTRY_IMAGE}:${VERSION2}";
     - docker push "${CI_REGISTRY_IMAGE}:${VERSION1}"
     - docker push "${CI_REGISTRY_IMAGE}:${VERSION2}"
-    only:
-    - master
+    #only:
+    #- tags
     tags:
     - shell-builder
     - linux
     - big-storage
     - qemu-support
+    dependencies: []
 
 ############################
 
 # BUILD and PUSH
-##### 3.5
-v3.5-cuda10.0-u16-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda10.0-u16_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda10.0-u16-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-    
-v3.5-cuda10.2-u16-gl_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda10.2-u16_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda10.2-u16-run_push:
-    variables:
-        CUDA_MAJOR: "10"
-        CUDA_MINOR: "2"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.0-u16-gl_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.0-u16_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.0-u16-run_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "0"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-    
-v3.5-cuda11.1-u16-gl_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "1"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.1-u16_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "1"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.1-u16-run_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "1"
-        UBUNTU_RELEASE_YEAR: "16"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-    
+##### 3.6
 # U 18
-v3.5-cuda10.0-u18-gl_push:
+v3.6-cuda10.0-u18-gl_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
+        CUDA_MINOR_NO_PATCH: "0"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.5-cuda10.0-u18_push:
+v3.6-cuda10.0-u18_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
+        CUDA_MINOR_NO_PATCH: "0"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-#v3.5-cuda10.0-u18-ros_push:
-#    variables:
-#        CUDA_MAJOR: "10"
-#        CUDA_MINOR: "0"
-#        UBUNTU_RELEASE_YEAR: "18"
-#        ZED_SDK_MAJOR: "3"
-#        ZED_SDK_MINOR: "5"
-#        ROS_DISTRO_ARG: "melodic"
-#        IMAGE_VARIANT: "ros-devel"
-#        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-#        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-#    when: manual
-#    <<: *build_image_push_definition
-
-v3.5-cuda10.0-u18-run_push:
+v3.6-cuda10.0-u18-run_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "0"
+        CUDA_MINOR_NO_PATCH: "0"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.5-cuda10.2-u18-gl_push:
+v3.6-cuda10.2-u18-gl_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
+        CUDA_MINOR_NO_PATCH: "2"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.5-cuda10.2-u18_push:
+v3.6-cuda10.2-u18_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
+        CUDA_MINOR_NO_PATCH: "2"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.5-cuda10.2-u18-run_push:
+v3.6-cuda10.2-u18-run_push:
     variables:
         CUDA_MAJOR: "10"
         CUDA_MINOR: "2"
+        CUDA_MINOR_NO_PATCH: "2"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.5-cuda11.0-u18-gl_push:
+v3.6-cuda11.4-u18-gl_push:
     variables:
         CUDA_MAJOR: "11"
-        CUDA_MINOR: "0"
+        CUDA_MINOR: "4.2"
+        CUDA_MINOR_NO_PATCH: "4"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.5-cuda11.0-u18_push:
+v3.6-cuda11.4-u18_push:
     variables:
         CUDA_MAJOR: "11"
-        CUDA_MINOR: "0"
+        CUDA_MINOR: "4.2"
+        CUDA_MINOR_NO_PATCH: "4"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.5-cuda11.0-u18-run_push:
+v3.6-cuda11.4-u18-run_push:
     variables:
         CUDA_MAJOR: "11"
-        CUDA_MINOR: "0"
+        CUDA_MINOR: "4.2"
+        CUDA_MINOR_NO_PATCH: "4"
         UBUNTU_RELEASE_YEAR: "18"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.1-u18-gl_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "1"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.1-u18_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "1"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.1-u18-run_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "1"
-        UBUNTU_RELEASE_YEAR: "18"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
     
 
 ## U 20
 
-v3.5-cuda11.0-u20_push:
+v3.6-cuda11.4-u20_push:
     variables:
         CUDA_MAJOR: "11"
-        CUDA_MINOR: "0"
+        CUDA_MINOR: "4.2"
+        CUDA_MINOR_NO_PATCH: "4"
         UBUNTU_RELEASE_YEAR: "20"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.5-cuda11.0-u20-gl_push:
+v3.6-cuda11.4-u20-gl_push:
     variables:
         CUDA_MAJOR: "11"
-        CUDA_MINOR: "0"
+        CUDA_MINOR: "4.2"
+        CUDA_MINOR_NO_PATCH: "4"
         UBUNTU_RELEASE_YEAR: "20"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
-v3.5-cuda11.0-u20-run_push:
+v3.6-cuda11.4-u20-run_push:
     variables:
         CUDA_MAJOR: "11"
-        CUDA_MINOR: "0"
+        CUDA_MINOR: "4.2"
+        CUDA_MINOR_NO_PATCH: "4"
         UBUNTU_RELEASE_YEAR: "20"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.1-u20_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "1"
-        UBUNTU_RELEASE_YEAR: "20"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.1-u20-gl_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "1"
-        UBUNTU_RELEASE_YEAR: "20"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "gl-devel"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
-    when: manual
-    <<: *build_image_push_definition
-
-v3.5-cuda11.1-u20-run_push:
-    variables:
-        CUDA_MAJOR: "11"
-        CUDA_MINOR: "1"
-        UBUNTU_RELEASE_YEAR: "20"
-        ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
-        IMAGE_VARIANT: "runtime"
-        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
+        VERSION: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_definition
 
 ### JETSON
 
 ## JP 43
-v3.5-jp43-devel-run_push:
+v3.6-jp43-devel-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "3"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "3.1"
         IMAGE_VARIANT: "devel"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp43-py-devel-run_push:
+v3.6-jp43-py-devel-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "3"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "3.1"
         IMAGE_VARIANT: "py-devel"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp43-py-runtime-run_push:
+v3.6-jp43-py-runtime-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "3"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "3.1"
         IMAGE_VARIANT: "py-runtime"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp43-runtime-run_push:
+v3.6-jp43-runtime-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "3"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "3.1"
         IMAGE_VARIANT: "runtime"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp43-tools-devel-run_push:
+v3.6-jp43-tools-devel-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "3"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "3.1"
         IMAGE_VARIANT: "tools-devel"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
 ## JP 44
 
-v3.5-jp44-devel-run_push:
+v3.6-jp44-devel-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "4"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "4.4"
         IMAGE_VARIANT: "devel"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp44-py-devel-run_push:
+v3.6-jp44-py-devel-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "4"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "4.4"
         IMAGE_VARIANT: "py-devel"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp44-py-runtime-run_push:
+v3.6-jp44-py-runtime-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "4"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "4.4"
         IMAGE_VARIANT: "py-runtime"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp44-runtime-run_push:
+v3.6-jp44-runtime-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "4"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "4.4"
         IMAGE_VARIANT: "runtime"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp44-tools-devel-run_push:
+v3.6-jp44-tools-devel-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "4"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "4.4"
         IMAGE_VARIANT: "tools-devel"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
 ## JP 45
 
-v3.5-jp45-devel-run_push:
+v3.6-jp45-devel-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "5"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "5.0"
         IMAGE_VARIANT: "devel"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp45-py-devel-run_push:
+v3.6-jp45-py-devel-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "5"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "5.0"
         IMAGE_VARIANT: "py-devel"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp45-py-runtime-run_push:
+v3.6-jp45-py-runtime-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "5"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "5.0"
         IMAGE_VARIANT: "py-runtime"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp45-runtime-run_push:
+v3.6-jp45-runtime-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "5"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "5.0"
         IMAGE_VARIANT: "runtime"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
 
-v3.5-jp45-tools-devel-run_push:
+v3.6-jp45-tools-devel-run_push:
     variables:
         JETPACK_MAJOR: "4"
         JETPACK_MINOR: "5"
         ZED_SDK_MAJOR: "3"
-        ZED_SDK_MINOR: "5"
+        ZED_SDK_MINOR: "6"
         L4T_MINOR_VERSION: "5.0"
         IMAGE_VARIANT: "tools-devel"
         VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
         VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
-        IMAGE_PATH: "${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_jetson_definition
+
+## JP 46
+
+v3.6-jp46-devel-run_push:
+    variables:
+        JETPACK_MAJOR: "4"
+        JETPACK_MINOR: "6"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "6"
+        L4T_MINOR_VERSION: "6.1"
+        IMAGE_VARIANT: "devel"
+        VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
+        VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_jetson_definition
+
+v3.6-jp46-py-devel-run_push:
+    variables:
+        JETPACK_MAJOR: "4"
+        JETPACK_MINOR: "6"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "6"
+        L4T_MINOR_VERSION: "6.1"
+        IMAGE_VARIANT: "py-devel"
+        VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
+        VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_jetson_definition
+
+v3.6-jp46-py-runtime-run_push:
+    variables:
+        JETPACK_MAJOR: "4"
+        JETPACK_MINOR: "6"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "6"
+        L4T_MINOR_VERSION: "6.1"
+        IMAGE_VARIANT: "py-runtime"
+        VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
+        VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_jetson_definition
+
+v3.6-jp46-runtime-run_push:
+    variables:
+        JETPACK_MAJOR: "4"
+        JETPACK_MINOR: "6"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "6"
+        L4T_MINOR_VERSION: "6.1"
+        IMAGE_VARIANT: "runtime"
+        VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
+        VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
+    when: manual
+    <<: *build_image_push_jetson_definition
+
+v3.6-jp46-tools-devel-run_push:
+    variables:
+        JETPACK_MAJOR: "4"
+        JETPACK_MINOR: "6"
+        ZED_SDK_MAJOR: "3"
+        ZED_SDK_MINOR: "6"
+        L4T_MINOR_VERSION: "6.1"
+        IMAGE_VARIANT: "tools-devel"
+        VERSION1: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-jetson-jp${JETPACK_MAJOR}.${JETPACK_MINOR}"
+        VERSION2: "${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-l4t-r32.${L4T_MINOR_VERSION}"
+        IMAGE_PATH: "zed-docker/${ZED_SDK_MAJOR}.X/jetpack_4.X/${IMAGE_VARIANT}"
     when: manual
     <<: *build_image_push_jetson_definition
