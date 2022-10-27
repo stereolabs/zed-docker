@@ -150,6 +150,11 @@ CMake Error: The following variables are used in this project, but they are set 
 Please set them or make sure they are set and tested correctly in the CMake files:
 CUDA_CUDA_LIBRARY (ADVANCED)
 ```
+The stubs libraries can also be used for the linker, to "replace" the missing runtime libraries :
+```
+cmake -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs ..
+```
+
 - Missing `libnvcuvid.so.1`
 ```
 /usr/bin/ld: warning: libnvcuvid.so.1, needed by /usr/local/zed/lib/libsl_zed.so, not found (try using -rpath or -rpath-link)
@@ -166,13 +171,11 @@ CUDA_CUDA_LIBRARY (ADVANCED)
 /usr/local/zed/lib/libsl_zed.so: undefined reference to `cuvidCreateVideoParser'
 collect2: error: ld returned 1 exit status
 ```
-
-Both problem can be fixed using the following cmake options :
+Since `nvcuvid` can be unavailable at compile time, we tell the compiler to ignore undefined symbols. This problem can be fixed using the following cmake option :
 
 ```
-cmake -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined" ..
+cmake -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined" ..
 ```
-The link path need to point to the CUDA stub folder, and since `nvcuvid` can be unavailable at compile time, we tell the compiler to ignore undefined symbols.
 
 
 ### USB replug/hot plug
