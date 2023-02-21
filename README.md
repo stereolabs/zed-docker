@@ -178,7 +178,7 @@ cmake -DCMAKE_CXX_FLAGS="-Wl,--allow-shlib-undefined" ..
 ```
 
 
-### USB replug/hot plug
+### USB replug / hot plug
 
 ZED-M and ZED2/ZED2i contains a udev device for the IMU and sensors data.
 On Linux, udev/serial device path are often ephemeral (will change if the device is unplugged and replugged).
@@ -192,6 +192,14 @@ docker run --gpus all -it -v /dev:/dev --privileged stereolabs/zed:3.7-runtime-c
 ```
 
 When not running the container in root (not using --privileged), the udev rules should be installed on the host, for instance by running the ZED SDK installer to be able to open the cameras, it may segfault otherwise. Alternatively [this script](https://gist.github.com/adujardin/2d5ce8f000fc6a7bd40bee2709749ff8) can be run.
+
+### ZED X / GMSL2
+
+For the ZED X, two more folders should be added as volume:
+
+```
+-v /tmp/argus_socket:/tmp/argus_socket -v /var/nvidia/nvcam/settings/:/var/nvidia/nvcam/settings/
+```
 
 ### Using the tools
 
