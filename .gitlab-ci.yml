@@ -13,6 +13,12 @@ image: docker:stable
     - big-storage
     - qemu-support
 
+.before_script_docker:
+  before_script: &before_script_docker_definition
+    - sudo chmod +x ./zed-docker/.ci/build_desktop_images.sh
+    - export ZED_SDK_MAJOR=$(grep "#define ZED_SDK_MAJOR_VERSION" ./lib/include/sl_zed/defines.hpp | tr -dc '0-9')
+    - export ZED_SDK_MINOR=$(grep "#define ZED_SDK_MINOR_VERSION" ./lib/include/sl_zed/defines.hpp | tr -dc '0-9')
+
 #services:
 #    - docker:stable-dind
 
@@ -33,16 +39,13 @@ image: docker:stable
 ############################
 
 # BUILD and PUSH
-##### 3.7
 # U 18
 
-v3.7-u18-cuda10.2_push:
+u18-cuda10.2_push:
     stage: build_zed_docker
-    before_script:
-        - sudo chmod +x ./zed-docker/.ci/build_desktop_images.sh
+    before_script: *before_script_docker_definition
     script:
         - export CUDA_MAJOR="10"; export CUDA_MINOR="2"; export CUDA_MINOR_NO_PATCH="2"; export UBUNTU_RELEASE_YEAR="18";
-        - export ZED_SDK_MAJOR=3; export ZED_SDK_MINOR=7
         - export IMAGE_VARIANT="gl-devel"; ./zed-docker/.ci/build_desktop_images.sh
         - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_desktop_images.sh
         - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_desktop_images.sh
@@ -50,99 +53,81 @@ v3.7-u18-cuda10.2_push:
     dependencies: []
     when: manual
 
-v3.7-u18-cuda11.4_push:
+u18-cuda11.8_push:
     stage: build_zed_docker
-    before_script:
-        - sudo chmod +x ./zed-docker/.ci/build_desktop_images.sh
+    before_script: *before_script_docker_definition
     script:
         - export CUDA_MAJOR="11"; export CUDA_MINOR="4.2"; export CUDA_MINOR_NO_PATCH="4"; export UBUNTU_RELEASE_YEAR="18";
-        - export ZED_SDK_MAJOR=3; export ZED_SDK_MINOR=7
         - export IMAGE_VARIANT="gl-devel"; ./zed-docker/.ci/build_desktop_images.sh
-        - export CUDA_MAJOR="11"; export CUDA_MINOR="5.1"; export CUDA_MINOR_NO_PATCH="5";
+        - export CUDA_MAJOR="11"; export CUDA_MINOR="8.0"; export CUDA_MINOR_NO_PATCH="8";
         - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_desktop_images.sh
         - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_desktop_images.sh
     tags: *tag_docker_target_definition
     dependencies: []
     when: manual
-    
 
 ## U 20
-v3.7-u20-cuda11.4_push:
+u20-cuda11.8_push:
     stage: build_zed_docker
-    before_script:
-        - sudo chmod +x ./zed-docker/.ci/build_desktop_images.sh
+    before_script: *before_script_docker_definition
     script:
         - export CUDA_MAJOR="11"; export CUDA_MINOR="4.2"; export CUDA_MINOR_NO_PATCH="4"; export UBUNTU_RELEASE_YEAR="20";
-        - export ZED_SDK_MAJOR=3; export ZED_SDK_MINOR=7
         - export IMAGE_VARIANT="gl-devel"; ./zed-docker/.ci/build_desktop_images.sh
-        - export CUDA_MAJOR="11"; export CUDA_MINOR="5.1"; export CUDA_MINOR_NO_PATCH="5";
+        - export CUDA_MAJOR="11"; export CUDA_MINOR="8.0"; export CUDA_MINOR_NO_PATCH="8";
+        - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_desktop_images.sh
+        - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_desktop_images.sh
+    tags: *tag_docker_target_definition
+    dependencies: []
+    when: manual
+
+u20-cuda12.1_push:
+    stage: build_zed_docker
+    before_script: *before_script_docker_definition
+    script:
+        #- export CUDA_MAJOR="12"; export CUDA_MINOR="1.1"; export CUDA_MINOR_NO_PATCH="1"; export UBUNTU_RELEASE_YEAR="20";
+        #- export IMAGE_VARIANT="gl-devel"; ./zed-docker/.ci/build_desktop_images.sh
+        - export CUDA_MAJOR="12"; export CUDA_MINOR="1.1"; export CUDA_MINOR_NO_PATCH="1"; export UBUNTU_RELEASE_YEAR="20";
+        - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_desktop_images.sh
+        - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_desktop_images.sh
+    tags: *tag_docker_target_definition
+    dependencies: []
+    when: manual
+
+## U 22
+u22-cuda11.8_push:
+    stage: build_zed_docker
+    before_script: *before_script_docker_definition
+    script:
+        #- export CUDA_MAJOR="11"; export CUDA_MINOR="7.0"; export CUDA_MINOR_NO_PATCH="7"; export UBUNTU_RELEASE_YEAR="22";
+        #- export IMAGE_VARIANT="gl-devel"; ./zed-docker/.ci/build_desktop_images.sh # does not exist on Ubuntu 22 yet
+        - export CUDA_MAJOR="11"; export CUDA_MINOR="8.0"; export CUDA_MINOR_NO_PATCH="8"; export UBUNTU_RELEASE_YEAR="22";
         - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_desktop_images.sh
         - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_desktop_images.sh
     tags: *tag_docker_target_definition
     dependencies: []
     when: manual
     
+u22-cuda12.1_push:
+    stage: build_zed_docker
+    before_script: *before_script_docker_definition
+    script:
+        #- export CUDA_MAJOR="11"; export CUDA_MINOR="7.0"; export CUDA_MINOR_NO_PATCH="7"; export UBUNTU_RELEASE_YEAR="22";
+        #- export IMAGE_VARIANT="gl-devel"; ./zed-docker/.ci/build_desktop_images.sh # does not exist on Ubuntu 22 yet
+        - export CUDA_MAJOR="12"; export CUDA_MINOR="1.1"; export CUDA_MINOR_NO_PATCH="1"; export UBUNTU_RELEASE_YEAR="22";
+        - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_desktop_images.sh
+        - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_desktop_images.sh
+    tags: *tag_docker_target_definition
+    dependencies: []
+    when: manual
+
 ### JETSON
 
-## l4t 32.4
-v3.7-l4t32.4_push:
-    stage: build_zed_docker
-    before_script:
-        - sudo chmod +x ./zed-docker/.ci/build_desktop_images.sh
-    script:
-        - export JETPACK_MAJOR="4"; export JETPACK_MINOR="4"; export L4T_MAJOR_VERSION="32"; export L4T_MINOR_VERSION="4"; export L4T_PATCH_VERSION="4"; export L4T_BASE_IMAGE="l4t-base"
-        - export ZED_SDK_MAJOR=3; export ZED_SDK_MINOR=7
-        - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="py-devel"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="py-runtime"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="tools-devel"; ./zed-docker/.ci/build_jetson_images.sh
-    tags: *tag_docker_qemu_target_definition
-    dependencies: []
-    when: manual
-
-## l4t 32.5
-v3.7-l4t32.5_push:
-    stage: build_zed_docker
-    before_script:
-        - sudo chmod +x ./zed-docker/.ci/build_desktop_images.sh
-    script:
-        - export JETPACK_MAJOR="4"; export JETPACK_MINOR="5"; export L4T_MAJOR_VERSION="32"; export L4T_MINOR_VERSION="5"; export L4T_PATCH_VERSION="0"; export L4T_BASE_IMAGE="l4t-base"
-        - export ZED_SDK_MAJOR=3; export ZED_SDK_MINOR=7
-        - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="py-devel"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="py-runtime"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="tools-devel"; ./zed-docker/.ci/build_jetson_images.sh
-    tags: *tag_docker_qemu_target_definition
-    dependencies: []
-    when: manual
-
-## l4t 32.6
-v3.7-l4t32.6_push:
-    stage: build_zed_docker
-    before_script:
-        - sudo chmod +x ./zed-docker/.ci/build_desktop_images.sh
-    script:
-        - export JETPACK_MAJOR="4"; export JETPACK_MINOR="6"; export L4T_MAJOR_VERSION="32"; export L4T_MINOR_VERSION="6"; export L4T_PATCH_VERSION="1"; export L4T_BASE_IMAGE="l4t-base"
-        - export ZED_SDK_MAJOR=3; export ZED_SDK_MINOR=7
-        - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="py-devel"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="py-runtime"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_jetson_images.sh
-        - export IMAGE_VARIANT="tools-devel"; ./zed-docker/.ci/build_jetson_images.sh
-    tags: *tag_docker_qemu_target_definition
-    dependencies: []
-    when: manual
-
 ## l4t 32.7
-v3.7-l4t32.7_push:
+l4t32.7_push:
     stage: build_zed_docker
-    before_script:
-        - sudo chmod +x ./zed-docker/.ci/build_desktop_images.sh
+    before_script: *before_script_docker_definition
     script:
         - export JETPACK_MAJOR="4"; export JETPACK_MINOR="6.1"; export L4T_MAJOR_VERSION="32"; export L4T_MINOR_VERSION="7"; export L4T_PATCH_VERSION="1"; export L4T_BASE_IMAGE="l4t-base"
-        - export ZED_SDK_MAJOR=3; export ZED_SDK_MINOR=7
         - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_jetson_images.sh
         - export IMAGE_VARIANT="py-devel"; ./zed-docker/.ci/build_jetson_images.sh
         - export IMAGE_VARIANT="py-runtime"; ./zed-docker/.ci/build_jetson_images.sh
@@ -153,13 +138,42 @@ v3.7-l4t32.7_push:
     when: manual
 
 ## l4t 35.1
-v3.7-l4t35.1_push:
+l4t35.1_push:
     stage: build_zed_docker
-    before_script:
-        - sudo chmod +x ./zed-docker/.ci/build_desktop_images.sh
+    before_script: *before_script_docker_definition
     script:
         - export JETPACK_MAJOR="5"; export JETPACK_MINOR="0.2"; export L4T_MAJOR_VERSION="35"; export L4T_MINOR_VERSION="1"; export L4T_PATCH_VERSION="0"; export L4T_BASE_IMAGE="l4t-jetpack"
-        - export ZED_SDK_MAJOR=3; export ZED_SDK_MINOR=7
+        - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_jetson_images.sh
+        - export IMAGE_VARIANT="py-devel"; ./zed-docker/.ci/build_jetson_images.sh
+        - export IMAGE_VARIANT="py-runtime"; ./zed-docker/.ci/build_jetson_images.sh
+        - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_jetson_images.sh
+        - export IMAGE_VARIANT="tools-devel"; ./zed-docker/.ci/build_jetson_images.sh
+    tags: *tag_docker_qemu_target_definition
+    dependencies: []
+    when: manual
+
+## l4t 35.2
+l4t35.2_push:
+    stage: build_zed_docker
+    before_script: *before_script_docker_definition
+    script:
+        - export JETPACK_MAJOR="5"; export JETPACK_MINOR="1.0"; export L4T_MAJOR_VERSION="35"; export L4T_MINOR_VERSION="2"; export L4T_PATCH_VERSION="1"; export L4T_BASE_IMAGE="l4t-jetpack"
+        - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_jetson_images.sh
+        - export IMAGE_VARIANT="py-devel"; ./zed-docker/.ci/build_jetson_images.sh
+        - export IMAGE_VARIANT="py-runtime"; ./zed-docker/.ci/build_jetson_images.sh
+        - export IMAGE_VARIANT="runtime"; ./zed-docker/.ci/build_jetson_images.sh
+        - export IMAGE_VARIANT="tools-devel"; ./zed-docker/.ci/build_jetson_images.sh
+    tags: *tag_docker_qemu_target_definition
+    dependencies: []
+    when: manual
+
+
+## l4t 35.3
+l4t35.3_push:
+    stage: build_zed_docker
+    before_script: *before_script_docker_definition
+    script:
+        - export JETPACK_MAJOR="5"; export JETPACK_MINOR="1.1"; export L4T_MAJOR_VERSION="35"; export L4T_MINOR_VERSION="3"; export L4T_PATCH_VERSION="1"; export L4T_BASE_IMAGE="l4t-jetpack"
         - export IMAGE_VARIANT="devel"; ./zed-docker/.ci/build_jetson_images.sh
         - export IMAGE_VARIANT="py-devel"; ./zed-docker/.ci/build_jetson_images.sh
         - export IMAGE_VARIANT="py-runtime"; ./zed-docker/.ci/build_jetson_images.sh
