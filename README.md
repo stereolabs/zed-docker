@@ -177,10 +177,10 @@ When not running the container in root (not using --privileged), the udev rules 
 
 ### ZED X / GMSL2
 
-For the ZED X, two more folders should be added as volume:
+For the ZED X, more folders should be added as volume:
 
 ```
--v /tmp/argus_socket:/tmp/argus_socket -v /var/nvidia/nvcam/settings/:/var/nvidia/nvcam/settings/
+-v /tmp/argus_socket:/tmp/argus_socket -v /var/nvidia/nvcam/settings/:/var/nvidia/nvcam/settings/ -v /etc/systemd/system:/etc/systemd/system
 ```
 
 ### Using the tools
