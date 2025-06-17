@@ -77,7 +77,7 @@ The camera connection can be verified using `lsusb`:
 With the [recently added support](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) of nvidia docker, it is now possible to run the ZED SDK inside docker on Jetson. We now provide a compatible image :
 
 ```bash
-docker pull stereolabs/zed:5.0-devel-l4t-r36.4
+docker pull stereolabs/zed:4.0-devel-l4t-r35.2
 ```
 
 One exemple of DockerFile can be found [here](4.X/l4t/devel/Dockerfile). The image is based on the [NVIDIA L4T image](https://ngc.nvidia.com/catalog/containers/nvidia:l4t-base).
@@ -118,16 +118,6 @@ docker build --build-arg L4T_MAJOR_VERSION=35 \
 ```
 
 Unfortunately it is not possible to emulate CUDA accelerated program with QEMU.
-
-## Running the image on Jetson natively
-
-A typical full command for ZED2i/ZEDX would be:
-
-```bash
-sudo docker run --runtime=nvidia -v /tmp/argus_socket:/tmp/argus_socket -v /var/nvidia/nvcam/settings/:/var/nvidia/nvcam/settings/ -v /etc/systemd/system:/etc/systemd/system  -v /usr/local/zed/settings/:/usr/local/zed/settings/ -v /usr/local/zed/resources/:/usr/local/zed/resources/ -v /etc/systemd/system/zed_x_daemon.service:/etc/systemd/system/zed_x_daemon.service -v /dev:/dev -v /tmp:/tmp --ipc=host --pid=host -e NVIDIA_DRIVER_CAPABILITIES=all -e DISPLAY=$DISPLAY -it --privileged --network=host stereolabs/zed:5.0-tools-devel-l4t-r36.4
-```
-
-This will mount all the necessary folders for GMSL communication, display and calibration, and AI model. The tools are also available.
 
 ## Troubleshooting
 
@@ -187,10 +177,10 @@ When not running the container in root (not using --privileged), the udev rules 
 
 ### ZED X / GMSL2
 
-For the ZED X, more folders should be added as volume:
+For the ZED X, two more folders should be added as volume:
 
 ```
--v /tmp/argus_socket:/tmp/argus_socket -v /var/nvidia/nvcam/settings/:/var/nvidia/nvcam/settings/ -v /etc/systemd/system:/etc/systemd/system -v /etc/systemd/system/zed_x_daemon.service:/etc/systemd/system/zed_x_daemon.service -v /dev:/dev -v /tmp:/tmp
+-v /tmp/argus_socket:/tmp/argus_socket -v /var/nvidia/nvcam/settings/:/var/nvidia/nvcam/settings/
 ```
 
 ### Using the tools
@@ -203,4 +193,4 @@ Feel free to open an issue if you find a bug, or a pull request for bug fixes, f
 
 ## Support
 
-If you need assistance, go to our Community site at https://community.stereolabs.com/
+If you need assistance go to our Community site at https://community.stereolabs.com/
