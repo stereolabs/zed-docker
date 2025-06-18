@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-
+set -e
+set -x
 VERSION="${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-${IMAGE_VARIANT}-cuda${CUDA_MAJOR}.${CUDA_MINOR_NO_PATCH}-ubuntu${UBUNTU_RELEASE_YEAR}.04"
 IMAGE_PATH="zed-docker/${ZED_SDK_MAJOR}.X/ubuntu/${IMAGE_VARIANT}"
 docker info

@@ -23,16 +23,6 @@ RUN apt-get update -y || true ; apt-get install --no-install-recommends lsb-rele
     rm -rf ZED_SDK_Linux.run && \
     rm -rf /var/lib/apt/lists/*
 
-# ZED Python API
-RUN apt-get update -y || true ; apt-get install --no-install-recommends python3 python3-pip python3-dev python3-setuptools build-essential -y && \ 
-    wget download.stereolabs.com/zedsdk/pyzed -O /usr/local/zed/get_python_api.py && \
-    python3 -m pip install requests && \
-    python3 /usr/local/zed/get_python_api.py && \
-    python3 -m pip install cython wheel && \
-    python3 -m pip install numpy *.whl && \
-    apt-get remove --purge build-essential python3-dev requests -y && apt-get autoremove -y && \
-    rm *.whl ; rm -rf /var/lib/apt/lists/*
-
 #This symbolic link is needed to use the streaming features on Jetson inside a container
 RUN ln -sf /usr/lib/aarch64-linux-gnu/tegra/libv4l2.so.0 /usr/lib/aarch64-linux-gnu/libv4l2.so
 
