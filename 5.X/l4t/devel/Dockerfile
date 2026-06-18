@@ -3,21 +3,25 @@ ARG L4T_MAJOR_VERSION
 ARG L4T_MINOR_VERSION
 ARG L4T_PATCH_VERSION
 ARG L4T_BASE_IMAGE
+# BASE_IMAGE may be overridden (e.g. for our self-hosted base-l4t-r36.5 / r38.4 images);
+# default keeps the legacy nvcr.io/nvidia/l4t-jetpack:r36.4.0-style ref.
+ARG BASE_IMAGE=nvcr.io/nvidia/${L4T_BASE_IMAGE}:r${L4T_MAJOR_VERSION}.${L4T_MINOR_VERSION}.${L4T_PATCH_VERSION}
 
-FROM nvcr.io/nvidia/${L4T_BASE_IMAGE}:r${L4T_MAJOR_VERSION}.${L4T_MINOR_VERSION}.${L4T_PATCH_VERSION}
+FROM ${BASE_IMAGE}
 
 ARG L4T_MAJOR_VERSION
 ARG L4T_MINOR_VERSION
 ARG L4T_PATCH_VERSION
 ARG ZED_SDK_MAJOR
 ARG ZED_SDK_MINOR
+ARG ZED_SDK_PATCH
 
 #This environment variable is needed to use the streaming features on Jetson inside a container
 ENV LOGNAME root
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update || true ; apt-get install --no-install-recommends lsb-release wget less udev zstd sudo apt-transport-https build-essential cmake -y&& \
     echo "# R${L4T_MAJOR_VERSION} (release), REVISION: ${L4T_MINOR_VERSION}.${L4T_PATCH_VERSION}" > /etc/nv_tegra_release ; \
-    wget -q --no-check-certificate -O ZED_SDK_Linux.run https://download.stereolabs.com/zedsdk/${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}/l4t${L4T_MAJOR_VERSION}.${L4T_MINOR_VERSION}/jetsons && \
+    wget -q --no-check-certificate -O ZED_SDK_Linux.run https://download.stereolabs.com/zedsdk/${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}.${ZED_SDK_PATCH}/l4t${L4T_MAJOR_VERSION}.${L4T_MINOR_VERSION}/jetsons && \
     chmod +x ZED_SDK_Linux.run ; ./ZED_SDK_Linux.run silent skip_tools skip_drivers && \
     rm -rf /usr/local/zed/resources/* \
     rm -rf ZED_SDK_Linux.run && \
