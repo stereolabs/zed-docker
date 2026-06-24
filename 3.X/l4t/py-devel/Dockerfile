@@ -23,7 +23,7 @@ RUN apt-get update || true && \
     apt-get remove --purge build-essential -y && apt-get autoremove -y && \
     wget -q --no-check-certificate -O ZED_SDK_Linux.run https://download.stereolabs.com/zedsdk/${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}/l4t${L4T_MAJOR_VERSION}.${L4T_MINOR_VERSION}/jetsons && \
     chmod +x ZED_SDK_Linux.run ; ./ZED_SDK_Linux.run -- silent skip_tools && \
-    rm -rf /usr/local/zed/resources/* \
+    rm -rf /usr/local/zed/resources/* && \
     rm -rf ZED_SDK_Linux.run && \
     rm -rf /var/lib/apt/lists/*
 
